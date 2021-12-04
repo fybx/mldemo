@@ -6,7 +6,19 @@ namespace mltoolcli
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            bool quit = false;
+            while (!quit)
+            {
+                Console.Title = @"user@mltool";
+                Console.WriteLine("user@mltool: ");
+                string[] tokens = Console.ReadLine()?.Trim().Split(' ');
+                quit = KomutIsle(tokens);
+            }
+        }
+
+        static bool KomutIsle(string[] tokens)
+        {
+            throw new NotImplementedException();
         }
     }
 }
