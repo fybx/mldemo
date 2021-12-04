@@ -1,0 +1,10 @@
+*.suo
+*.user
+
+[Rr]elease/
+[Dd]ebug/
+[Bb]in/
+[Oo]bj/
+
+.idea/
+.vs/
