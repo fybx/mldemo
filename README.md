@@ -5,7 +5,7 @@ Yeni bir model veya veri seti dosyası oluşturur. Dosya programın çalıştır
 
 > $ load <model/dataset> <file>
 
-Model veya veri setini train/test aşamasında kullanılmak üzere programa yükler.
+Model veya veri setini train/test aşamasında kullanmak üzere programa yükler.
 
 > $ help
 
@@ -13,11 +13,11 @@ Yardım mesajını gösterir.
 
 > $ exit
 
-CLI'den çıkar.
+CLI'ten çıkar.
 
 > $ test
 
-YÜklü olan test veri setini kullanarak yüklü olan modeli test eder.
+Yüklü olan test veri setini kullanarak yüklü olan modeli test eder.
 
 > $ train
 
