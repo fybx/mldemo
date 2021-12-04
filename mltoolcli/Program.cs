@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Resources;
 
 namespace mltoolcli
 {
@@ -20,13 +21,13 @@ namespace mltoolcli
             switch (tokens[0])
             {
                 case "help":
-                    Console.WriteLine("\nmltool cli v0010");
-                    Console.WriteLine("exit                : CLI'ten çıkar");
-                    Console.WriteLine("help                : Bu mesajı gösterir");
-                    Console.WriteLine("train               : Yüklü olan eğitim veri setini kullanarak yüklü olan modeli eğitir.");
-                    Console.WriteLine("test                : Yüklü olan test veri setini kullanarak yüklü olan modeli test eder.");
-                    Console.WriteLine("load <model/dataset>: Model veya veri setini train/test aşamasında kullanılmak üzere programa yükler.");
-                    Console.WriteLine("new <model/dataset> : Yeni bir model veya veri seti dosyası oluşturur. Dosya programın çalıştırıldığı yolda konumlandırılacaktır.");
+                    Console.WriteLine("\nmltool cli v0011");
+                    Console.WriteLine(TurkishStrings.HelpMsg_Help);
+                    Console.WriteLine(TurkishStrings.HelpMsg_Exit);
+                    Console.WriteLine(TurkishStrings.HelpMsg_Train);
+                    Console.WriteLine(TurkishStrings.HelpMsg_Test);
+                    Console.WriteLine(TurkishStrings.HelpMsg_Load);
+                    Console.WriteLine(TurkishStrings.HelpMsg_New);
                     break;
                 
                 case "exit":

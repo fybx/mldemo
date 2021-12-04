@@ -5,4 +5,19 @@
         <TargetFramework>net5.0</TargetFramework>
     </PropertyGroup>
 
+    <ItemGroup>
+      <EmbeddedResource Update="TurkishStrings.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>TurkishStrings.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="TurkishStrings.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>TurkishStrings.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
 </Project>
