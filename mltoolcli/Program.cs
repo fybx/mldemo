@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.Resources;
+using System.Runtime.InteropServices;
 
 namespace mltoolcli
 {
@@ -34,11 +37,32 @@ namespace mltoolcli
                     return true;
                 
                 case "default":
-                    Console.WriteLine(@"mltool: ""{0}"" geçerli bir komut değil", tokens[0]);
+                    Console.WriteLine(@"mltool: '{0}' geçerli bir komut değil", tokens[0]);
                     break;
             }
-
+            
             return false;
+        }
+
+        private static void ScriptCagir(string scriptName)
+        {
+            if (!File.Exists(AppContext.BaseDirectory + scriptName))
+                throw new FileNotFoundException(TurkishStrings.ExcpMsg_ScriptNotFound, AppContext.BaseDirectory + scriptName);
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                ProcessStartInfo info = new() { FileName = "python3", Arguments = AppContext.BaseDirectory + $"{scriptName}.py" };
+                Process prc = new() { StartInfo = info };
+                prc.Start();   
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                throw new NotImplementedException();
+            }
+            else
+            {
+                Console.WriteLine(@"mltool: Ewww");
+            }
         }
     }
 }

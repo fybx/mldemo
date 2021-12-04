@@ -80,5 +80,11 @@ namespace mltoolcli {
                 return ResourceManager.GetString("HelpMsg_New", resourceCulture);
             }
         }
+        
+        internal static string ExcpMsg_ScriptNotFound {
+            get {
+                return ResourceManager.GetString("ExcpMsg_ScriptNotFound", resourceCulture);
+            }
+        }
     }
 }

@@ -36,4 +36,7 @@
     <data name="HelpMsg_New" xml:space="preserve">
         <value>new &lt;model/dataset&gt; : Yeni bir model veya veri seti dosyası oluşturur. Dosya programın çalıştırıldığı yolda konumlandırılacaktır.</value>
     </data>
+    <data name="ExcpMsg_ScriptNotFound" xml:space="preserve">
+        <value>Çağırdığınız script dosyası bulunamadı!</value>
+    </data>
 </root>
