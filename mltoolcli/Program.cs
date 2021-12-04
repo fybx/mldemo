@@ -10,12 +10,17 @@ namespace mltoolcli
     {
         private static void Main(string[] args)
         {
-            bool quit = false;
-            while (!quit)
+            if (args.Length is not 0)
+                KomutIsle(args);
+            else
             {
-                Console.Title = @"user@mltool";
-                Console.Write("user@mltool: ");
-                quit = KomutIsle(Console.ReadLine()?.Trim().Split(' '));
+                bool quit = false;
+                while (!quit)
+                {
+                    Console.Title = @"user@mltool";
+                    Console.Write("user@mltool: ");
+                    quit = KomutIsle(Console.ReadLine()?.Trim().Split(' '));
+                }   
             }
         }
 
