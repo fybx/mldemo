@@ -71,12 +71,12 @@ namespace mltoolcli
         /// <exception cref="NotImplementedException"></exception>
         private static void ScriptCagir(string scriptName, string additionalArgs)
         {
-            if (!File.Exists(AppContext.BaseDirectory + scriptName))
+            if (!File.Exists($"{AppContext.BaseDirectory}pyscripts/{scriptName}.py") || !File.Exists(AppContext.BaseDirectory + $"pyscripts\\{scriptName}.py"))
                 throw new FileNotFoundException(TurkishStrings.ExcpMsg_ScriptNotFound, AppContext.BaseDirectory + scriptName);
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
-                ProcessStartInfo info = new() { FileName = "python3", Arguments = AppContext.BaseDirectory + $"scripts/{scriptName}.py " + additionalArgs };
+                ProcessStartInfo info = new() { FileName = "python3", Arguments = $"{AppContext.BaseDirectory}pyscripts/{scriptName}.py {additionalArgs}" };
                 Process prc = new() { StartInfo = info };
                 prc.Start();   
             }
