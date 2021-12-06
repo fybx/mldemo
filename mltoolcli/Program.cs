@@ -44,7 +44,7 @@ namespace mltoolcli
                 case "exit":
                     return true;
                 
-                case "default":
+                default:
                     Console.WriteLine(@"mltool: '{0}' geçerli bir komut değil", tokens[0]);
                     break;
             }
