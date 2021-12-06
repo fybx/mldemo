@@ -51,4 +51,13 @@
     <data name="HelpMsg_ListName" xml:space="preserve">
         <value>Komutlar:</value>
     </data>
+    <data name="Syntax_New0" xml:space="preserve">
+        <value>  new help             Bu mesajı gösterir</value>
+    </data>
+    <data name="Syntax_New1" xml:space="preserve">
+        <value>  new model [name]     İsmi [name] olarak verilen modeli yaratır. Dosya program klasöründe oluşturulur</value>
+    </data>
+    <data name="Syntax_New2" xml:space="preserve">
+        <value>  new dataset [name]   İsmi [name] olarak verilen ve rastgele veri içeren veri setini yaratır. Dosya program klasöründe oluşturulur</value>
+    </data>
 </root>

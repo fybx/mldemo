@@ -110,5 +110,23 @@ namespace mltoolcli {
                 return ResourceManager.GetString("HelpMsg_ListName", resourceCulture);
             }
         }
+        
+        internal static string Syntax_New0 {
+            get {
+                return ResourceManager.GetString("Syntax_New0", resourceCulture);
+            }
+        }
+        
+        internal static string Syntax_New1 {
+            get {
+                return ResourceManager.GetString("Syntax_New1", resourceCulture);
+            }
+        }
+        
+        internal static string Syntax_New2 {
+            get {
+                return ResourceManager.GetString("Syntax_New2", resourceCulture);
+            }
+        }
     }
 }
