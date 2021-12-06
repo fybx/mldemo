@@ -45,6 +45,30 @@ namespace mltoolcli
                     return false;
                 
                 case "new":
+                    if (tokens.Length is 3)
+                    {
+                        switch (tokens[1])
+                        {
+                            case @"model":
+                                string modelloc = AppContext.BaseDirectory + (tokens[2].EndsWith(".model") ? tokens[2] : tokens[2] + ".model");
+                                File.Create(modelloc).Close();
+                                ScriptCagir(@"newmodel", modelloc);
+                                break;
+                            
+                            case @"dataset":
+                                string datasetloc = AppContext.BaseDirectory + (tokens[2].EndsWith(".dataset") ? tokens[2] : tokens[2] + ".dataset");
+                                File.Create(datasetloc).Close();
+                                ScriptCagir(@"newdataset", datasetloc);
+                                break;
+                            
+                            default:
+                                SyntaxMesaji("new");
+                                break;
+                        }
+                    }
+                    else
+                        SyntaxMesaji("new");
+
                     return false;
                 
                 case "eval":
@@ -71,7 +95,7 @@ namespace mltoolcli
         /// <exception cref="NotImplementedException"></exception>
         private static void ScriptCagir(string scriptName, string additionalArgs)
         {
-            if (!File.Exists($"{AppContext.BaseDirectory}pyscripts/{scriptName}.py") || !File.Exists(AppContext.BaseDirectory + $"pyscripts\\{scriptName}.py"))
+            if (!File.Exists($"{AppContext.BaseDirectory}pyscripts/{scriptName}.py") && !File.Exists(AppContext.BaseDirectory + $"pyscripts\\{scriptName}.py"))
                 throw new FileNotFoundException(TurkishStrings.ExcpMsg_ScriptNotFound, AppContext.BaseDirectory + scriptName);
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
