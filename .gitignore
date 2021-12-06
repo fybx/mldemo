@@ -1,5 +1,7 @@
 *.suo
 *.user
+*.model
+*.dataset
 
 [Rr]elease/
 [Dd]ebug/
@@ -8,3 +10,4 @@
 
 .idea/
 .vs/
+.ipynb_checkpoints/
