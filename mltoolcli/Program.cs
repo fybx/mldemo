@@ -62,14 +62,21 @@ namespace mltoolcli
             }
         }
 
-        private static void ScriptCagir(string scriptName)
+        /// <summary>
+        /// Calls python script from "pyscripts" folder in base directory of running program
+        /// </summary>
+        /// <param name="scriptName">Name of needed script</param>
+        /// <param name="additionalArgs">Any additional arguments, these will be concatenated to script path</param>
+        /// <exception cref="FileNotFoundException">May throw this exception if script file is not found</exception>
+        /// <exception cref="NotImplementedException"></exception>
+        private static void ScriptCagir(string scriptName, string additionalArgs)
         {
             if (!File.Exists(AppContext.BaseDirectory + scriptName))
                 throw new FileNotFoundException(TurkishStrings.ExcpMsg_ScriptNotFound, AppContext.BaseDirectory + scriptName);
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
-                ProcessStartInfo info = new() { FileName = "python3", Arguments = AppContext.BaseDirectory + $"{scriptName}.py" };
+                ProcessStartInfo info = new() { FileName = "python3", Arguments = AppContext.BaseDirectory + $"scripts/{scriptName}.py " + additionalArgs };
                 Process prc = new() { StartInfo = info };
                 prc.Start();   
             }
