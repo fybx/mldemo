@@ -89,5 +89,27 @@ namespace mltoolcli
                 Console.WriteLine(@"mltool: Ewww");
             }
         }
+
+        private static void SyntaxMesaji(string command)
+        {
+            switch (command)
+            {
+                case "new":
+                    Console.WriteLine(@"mltool new:");
+                    Console.WriteLine(TurkishStrings.Syntax_New0);
+                    Console.WriteLine(TurkishStrings.Syntax_New1);
+                    Console.WriteLine(TurkishStrings.Syntax_New2);
+                    break;
+                
+                case "eval":
+                    break;
+                
+                case "train":
+                    break;
+                
+                case "load":
+                    break;
+            }
+        }
     }
 }
