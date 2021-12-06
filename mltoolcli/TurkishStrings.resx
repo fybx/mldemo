@@ -46,7 +46,7 @@
         <value>Komutlar hakkında bilgi almak için 'mltool [komut] help' kullanın.</value>
     </data>
     <data name="Version" xml:space="preserve">
-        <value>mltool v0011</value>
+        <value>mltool v0100</value>
     </data>
     <data name="HelpMsg_ListName" xml:space="preserve">
         <value>Komutlar:</value>

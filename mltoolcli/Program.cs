@@ -28,6 +28,9 @@ namespace mltoolcli
         {
             switch (tokens[0])
             {
+                case "exit":
+                    return true;
+                
                 case "help":
                     Console.WriteLine(TurkishStrings.Version);
                     Console.WriteLine(TurkishStrings.HelpMsg_Usage);
@@ -39,17 +42,24 @@ namespace mltoolcli
                     Console.WriteLine(TurkishStrings.HelpMsg_Train);
                     Console.WriteLine(TurkishStrings.HelpMsg_Load);
                     Console.WriteLine('\n' + TurkishStrings.HelpMsg_Info);
-                    break;
-
-                case "exit":
-                    return true;
+                    return false;
                 
+                case "new":
+                    return false;
+                
+                case "eval":
+                    return false;
+                
+                case "train":
+                    return false;
+                
+                case "load":
+                    return false;
+
                 default:
                     Console.WriteLine(@"mltool: '{0}' geçerli bir komut değil", tokens[0]);
-                    break;
+                    return false;
             }
-            
-            return false;
         }
 
         private static void ScriptCagir(string scriptName)
