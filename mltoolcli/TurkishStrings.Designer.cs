@@ -86,5 +86,29 @@ namespace mltoolcli {
                 return ResourceManager.GetString("ExcpMsg_ScriptNotFound", resourceCulture);
             }
         }
+        
+        internal static string HelpMsg_Usage {
+            get {
+                return ResourceManager.GetString("HelpMsg_Usage", resourceCulture);
+            }
+        }
+        
+        internal static string HelpMsg_Info {
+            get {
+                return ResourceManager.GetString("HelpMsg_Info", resourceCulture);
+            }
+        }
+        
+        internal static string Version {
+            get {
+                return ResourceManager.GetString("Version", resourceCulture);
+            }
+        }
+        
+        internal static string HelpMsg_ListName {
+            get {
+                return ResourceManager.GetString("HelpMsg_ListName", resourceCulture);
+            }
+        }
     }
 }

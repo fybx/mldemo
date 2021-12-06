@@ -19,24 +19,36 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="HelpMsg_Help" xml:space="preserve">
-        <value>help                : Bu mesajı gösterir</value>
+        <value>  help       Bu mesajı gösterir</value>
     </data>
     <data name="HelpMsg_Exit" xml:space="preserve">
-        <value>exit                : CLI'ten çıkar</value>
+        <value>  exit       CLI'ten çıkar</value>
     </data>
     <data name="HelpMsg_Train" xml:space="preserve">
-        <value>train               : Yüklü olan eğitim veri setini kullanarak yüklü olan modeli eğitir.</value>
+        <value>  train      Yüklü olan eğitim veri setini kullanarak yüklü olan modeli eğitir</value>
     </data>
     <data name="HelpMsg_Test" xml:space="preserve">
-        <value>test                : Yüklü olan test veri setini kullanarak yüklü olan modeli test eder.</value>
+        <value>  eval       Kullanıcıdan alınan sayının modele göre sonucunu hesaplar</value>
     </data>
     <data name="HelpMsg_Load" xml:space="preserve">
-        <value>load &lt;model/dataset&gt;: Model veya veri setini train/test aşamasında kullanılmak üzere programa yükler.</value>
+        <value>  load       Model veya veri setini train/test aşamasında kullanılmak üzere programa yükler</value>
     </data>
     <data name="HelpMsg_New" xml:space="preserve">
-        <value>new &lt;model/dataset&gt; : Yeni bir model veya veri seti dosyası oluşturur. Dosya programın çalıştırıldığı yolda konumlandırılacaktır.</value>
+        <value>  new        Yeni bir model veya veri seti dosyası oluşturur</value>
     </data>
     <data name="ExcpMsg_ScriptNotFound" xml:space="preserve">
         <value>Çağırdığınız script dosyası bulunamadı!</value>
+    </data>
+    <data name="HelpMsg_Usage" xml:space="preserve">
+        <value>Kullanımı: mltool [komut] [argümanlar]</value>
+    </data>
+    <data name="HelpMsg_Info" xml:space="preserve">
+        <value>Komutlar hakkında bilgi almak için 'mltool [komut] help' kullanın.</value>
+    </data>
+    <data name="Version" xml:space="preserve">
+        <value>mltool v0011</value>
+    </data>
+    <data name="HelpMsg_ListName" xml:space="preserve">
+        <value>Komutlar:</value>
     </data>
 </root>
