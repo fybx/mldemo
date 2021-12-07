@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Runtime.InteropServices;
 
@@ -67,10 +69,17 @@ namespace mltoolcli
                     break;
                 
                 case "load":
+                    if (args.Length is 2)
+                    {
+                        if (!File.Exists(args[1]))
+                            Console.WriteLine("mltool: [HATA] Dosya bulunamadı veya açılamıyor.");
+                        else
+                            ValidateFile(args[1]);
+                    }
                     break;
 
                 default:
-                    Console.WriteLine(@"mltool: '{0}' geçerli bir komut değil", args[0]);
+                    Console.WriteLine("mltool: '{0}' geçerli bir komut değil", args[0]);
                     break;
             }
         }
@@ -113,6 +122,32 @@ namespace mltoolcli
                 for (int i = 0; i < 6; i++)
                     result += ModelContent[i] * Math.Pow(number, 5 - i);
                 Console.WriteLine($@"{ModelName}({number}) = {result}");
+            }
+        }
+
+        private static void ValidateFile(string path)
+        {
+            List<string> lines = File.ReadAllLines(path).ToList();
+            switch (lines.Count)
+            {
+                case 8 when lines[0] is @"mltool modeli":
+                    ModelPath = path;
+                    ModelName = lines[1];
+                    ModelContent = new double[6];
+                    for (int i = 2; i < 8; i++)
+                        ModelContent[i - 2] = double.Parse(lines[i]);
+                    break;
+                
+                case 66 when lines[0] is @"mltool veri seti":
+                    DatasetPath = path;
+                    DatasetName = lines[1];
+                    for (int j = 2; j < 66; j++)
+                        DatasetContent[j - 2] = double.Parse(lines[j]);
+                    break;
+                
+                default:
+                    Console.WriteLine($"mltool: [HATA] '{path}' dosyası tanınamadı.");
+                    break;
             }
         }
         
