@@ -1,24 +1,24 @@
-### mltool cli komutları
-> $ new <model/dataset> 
+## mltool cli komutları
+> $ new [model/dataset] [name]
 
-Yeni bir model veya veri seti dosyası oluşturur. Dosya programın çalıştırıldığı yolda konumlandırılacaktır.
+İsmi [name] olarak verilen modeli/veri setini yaratır. Dosya programın çalıştığı klasörde oluşturulur.
 
-> $ load <model/dataset> <file>
+> $ load [model/dataset] [file]
 
-Model veya veri setini train/test aşamasında kullanmak üzere programa yükler.
+[path] model/veri seti dosyasını okur, doğrular ve train/eval için kullanılmak üzere belleğe kaydeder.
 
-> $ help
+> $ mltool help
 
 Yardım mesajını gösterir.
 
-> $ exit
+> $ mltool [komut] help
+  
+Komuta ait yardım mesajını gösterir.
+  
+> $ eval
 
-CLI'ten çıkar.
-
-> $ test
-
-Yüklü olan test veri setini kullanarak yüklü olan modeli test eder.
+Kullanıcıdan alınan sayının belleğe yüklenen model dosyasında ifade edilen fonksiyon altında görüntüsünü hesaplar.
 
 > $ train
 
-Yüklü olan eğitim veri setini kullanarak yüklü olan modeli eğitir.
+'load' komutu ile belleğe yüklenen dataset dosyasını kullanarak modeli eğitir
