@@ -115,12 +115,22 @@ namespace mltoolcli
                     break;
                 
                 case "eval":
+                    Console.WriteLine(@"mltool eval:");
+                    Console.WriteLine(TurkishStrings.Syntax_Eval0);
+                    Console.WriteLine(TurkishStrings.Syntax_Eval1);
                     break;
                 
                 case "train":
+                    Console.WriteLine(@"mltool train:");
+                    Console.WriteLine(TurkishStrings.Syntax_Train0);
+                    Console.WriteLine(TurkishStrings.Syntax_Train1);
                     break;
                 
                 case "load":
+                    Console.WriteLine(@"mltool load:");
+                    Console.WriteLine(TurkishStrings.Syntax_Load0);
+                    Console.WriteLine(TurkishStrings.Syntax_Load1);
+                    Console.WriteLine(TurkishStrings.Syntax_Load2);
                     break;
             }
         }
