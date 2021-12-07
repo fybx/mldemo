@@ -1,11 +1,11 @@
 import random
 import sys
 
-print("mltool (pyscripts): [BİLGİ] yeni veri seti yaratılıyor!")
+print("mltool: yeni veri seti yaratılıyor!")
 try:
     fileloc = sys.argv[1]   # cli tarafından yaratılan veri seti dosyasının tam konumu
 except IndexError:
-    print("mltool (pyscripts): [HATA] newdataset.py fileloc argümanı bekliyor.")
+    print("mltool: newdataset.py fileloc argümanı bekliyor.")
     sys.exit()
 
 xvals = []
@@ -29,6 +29,3 @@ with open(fileloc, 'w') as f:
         f.write("%s\n" % item)
     for item in yvals:
         f.write("%s\n" % item)
-
-print("mltool (pyscripts): [BİLGİ] veri seti yaratıldı.")
-print("Konum: %s" % fileloc)
