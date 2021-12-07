@@ -41,17 +41,17 @@ def save_model(location, name, a, b, c, d, e, f):
 
 
 def main():
-    print("mltool: model eğitiliyor!")
+    print("mltool (pyscripts): model eğitiliyor!")
     try:
         datasetloc = sys.argv[1]  # kullanılacak veri seti dosyasının tam konumu
     except IndexError:
-        print("mltool: [HATA] trainmodel.py datasetloc argümanı bekliyor")
+        print("mltool (pyscripts): [HATA] trainmodel.py datasetloc argümanı bekliyor")
         sys.exit()
 
     try:
         modelloc = sys.argv[2]  # kullanılacak model dosyasının tam konumu
     except IndexError:
-        print("mltool: [HATA] trainmodel.py modelloc argümanı bekliyor")
+        print("mltool (pyscripts): [HATA] trainmodel.py modelloc argümanı bekliyor")
         sys.exit()
 
     x, y = read_dataset(datasetloc)
