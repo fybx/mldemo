@@ -10,53 +10,31 @@ namespace mltoolcli
     {
         private static void Main(string[] args)
         {
-            if (args.Length is not 0)
-                KomutIsle(args);
-            else
+            if (args.Length is 0)
             {
-                bool quit = false;
-                while (!quit)
-                {
-                    Console.Title = @"user@mltool";
-                    Console.Write("user@mltool: ");
-                    quit = KomutIsle(Console.ReadLine()?.Trim().Split(' '));
-                }   
+                SyntaxMesaji("help");
+                return;
             }
-        }
 
-        private static bool KomutIsle(string[] tokens)
-        {
-            switch (tokens[0])
+            switch (args[0])
             {
-                case "exit":
-                    return true;
-                
                 case "help":
-                    Console.WriteLine(TurkishStrings.Version);
-                    Console.WriteLine(TurkishStrings.HelpMsg_Usage);
-                    Console.WriteLine('\n' + TurkishStrings.HelpMsg_ListName);
-                    Console.WriteLine(TurkishStrings.HelpMsg_Exit);
-                    Console.WriteLine(TurkishStrings.HelpMsg_Help);
-                    Console.WriteLine(TurkishStrings.HelpMsg_New);
-                    Console.WriteLine(TurkishStrings.HelpMsg_Test);
-                    Console.WriteLine(TurkishStrings.HelpMsg_Train);
-                    Console.WriteLine(TurkishStrings.HelpMsg_Load);
-                    Console.WriteLine('\n' + TurkishStrings.HelpMsg_Info);
-                    return false;
+                        SyntaxMesaji("help");
+                    break;
                 
                 case "new":
-                    if (tokens.Length is 3)
+                    if (args.Length is 3)
                     {
-                        switch (tokens[1])
+                        switch (args[1])
                         {
                             case @"model":
-                                string modelloc = AppContext.BaseDirectory + (tokens[2].EndsWith(".model") ? tokens[2] : tokens[2] + ".model");
+                                string modelloc = AppContext.BaseDirectory + (args[2].EndsWith(".model") ? args[2] : args[2] + ".model");
                                 File.Create(modelloc).Close();
                                 ScriptCagir(@"newmodel", modelloc);
                                 break;
                             
                             case @"dataset":
-                                string datasetloc = AppContext.BaseDirectory + (tokens[2].EndsWith(".dataset") ? tokens[2] : tokens[2] + ".dataset");
+                                string datasetloc = AppContext.BaseDirectory + (args[2].EndsWith(".dataset") ? args[2] : args[2] + ".dataset");
                                 File.Create(datasetloc).Close();
                                 ScriptCagir(@"newdataset", datasetloc);
                                 break;
@@ -68,21 +46,20 @@ namespace mltoolcli
                     }
                     else
                         SyntaxMesaji("new");
+                    break;
 
-                    return false;
-                
                 case "eval":
-                    return false;
+                    break;
                 
                 case "train":
-                    return false;
+                    break;
                 
                 case "load":
-                    return false;
+                    break;
 
                 default:
-                    Console.WriteLine(@"mltool: '{0}' geçerli bir komut değil", tokens[0]);
-                    return false;
+                    Console.WriteLine(@"mltool: '{0}' geçerli bir komut değil", args[0]);
+                    break;
             }
         }
 
@@ -118,6 +95,19 @@ namespace mltoolcli
         {
             switch (command)
             {
+                case "help":
+                    Console.WriteLine(TurkishStrings.Version);
+                    Console.WriteLine(TurkishStrings.HelpMsg_Usage);
+                    Console.WriteLine('\n' + TurkishStrings.HelpMsg_ListName);
+                    Console.WriteLine(TurkishStrings.HelpMsg_Exit);
+                    Console.WriteLine(TurkishStrings.HelpMsg_Help);
+                    Console.WriteLine(TurkishStrings.HelpMsg_New);
+                    Console.WriteLine(TurkishStrings.HelpMsg_Test);
+                    Console.WriteLine(TurkishStrings.HelpMsg_Train);
+                    Console.WriteLine(TurkishStrings.HelpMsg_Load);
+                    Console.WriteLine('\n' + TurkishStrings.HelpMsg_Info);
+                    break;
+                
                 case "new":
                     Console.WriteLine(@"mltool new:");
                     Console.WriteLine(TurkishStrings.Syntax_New0);
