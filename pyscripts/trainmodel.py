@@ -14,11 +14,12 @@ def read_dataset(location):
         lines = f.read().splitlines()
 
     del lines[0]
+    name = lines[0]
     del lines[0]
     lines = [int(i) for i in lines]  # list[str] => list[int]
     xvals = lines[0:32]
     yvals = lines[32:64]
-    return xvals, yvals
+    return name, xvals, yvals
 
 
 def read_model(location):
@@ -54,9 +55,8 @@ def main():
         print("mltool (pyscripts): [HATA] trainmodel.py modelloc argümanı bekliyor")
         sys.exit()
 
-    x, y = read_dataset(datasetloc)
+    datasetname, x, y = read_dataset(datasetloc)
     modelname, a, b, c, d, e, f = read_model(modelloc)
-
     plot.xlabel("x ekseni")
     plot.ylabel("y ekseni")
     plot.title(modelname)
@@ -67,7 +67,9 @@ def main():
     y_line = polyfunc(x_line, a, b, c, d, e, f)
     save_model(modelloc, modelname, a, b, c, d, e, f)
     plot.plot(x_line, y_line, '--', color='red')
-    plot.show()
+    figloc = modelname + " on " + datasetname + ".png"
+    plot.savefig(figloc)
+    print("mltool (pyscripts): [BİLGİ] model eğitildi. grafik '%s' konumuna kaydedildi" % figloc)
 
 
 main()
