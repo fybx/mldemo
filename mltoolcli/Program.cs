@@ -1,24 +1,25 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Resources;
 using System.Runtime.InteropServices;
 
 namespace mltoolcli
 {
-    internal static class Program
+    class Program
     {
         private static void Main(string[] args)
         {
             if (args.Length is 0)
             {
-                PrintHelp("help");
+                SyntaxMesaji("help");
                 return;
             }
 
             switch (args[0])
             {
                 case "help":
-                        PrintHelp("help");
+                        SyntaxMesaji("help");
                     break;
                 
                 case "new":
@@ -27,24 +28,24 @@ namespace mltoolcli
                         switch (args[1])
                         {
                             case @"model":
-                                string modelPath = AppContext.BaseDirectory + (args[2].EndsWith(".model") ? args[2] : args[2] + ".model");
-                                File.Create(modelPath).Close();
-                                CallScript(@"newmodel", modelPath);
+                                string modelloc = AppContext.BaseDirectory + (args[2].EndsWith(".model") ? args[2] : args[2] + ".model");
+                                File.Create(modelloc).Close();
+                                ScriptCagir(@"newmodel", modelloc);
                                 break;
                             
                             case @"dataset":
-                                string datasetPath = AppContext.BaseDirectory + (args[2].EndsWith(".dataset") ? args[2] : args[2] + ".dataset");
-                                File.Create(datasetPath).Close();
-                                CallScript(@"newdataset", datasetPath);
+                                string datasetloc = AppContext.BaseDirectory + (args[2].EndsWith(".dataset") ? args[2] : args[2] + ".dataset");
+                                File.Create(datasetloc).Close();
+                                ScriptCagir(@"newdataset", datasetloc);
                                 break;
                             
                             default:
-                                PrintHelp("new");
+                                SyntaxMesaji("new");
                                 break;
                         }
                     }
                     else
-                        PrintHelp("new");
+                        SyntaxMesaji("new");
                     break;
 
                 case "eval":
@@ -69,7 +70,7 @@ namespace mltoolcli
         /// <param name="additionalArgs">Any additional arguments, these will be concatenated to script path</param>
         /// <exception cref="FileNotFoundException">May throw this exception if script file is not found</exception>
         /// <exception cref="NotImplementedException"></exception>
-        private static void CallScript(string scriptName, string additionalArgs)
+        private static void ScriptCagir(string scriptName, string additionalArgs)
         {
             if (!File.Exists($"{AppContext.BaseDirectory}pyscripts/{scriptName}.py") && !File.Exists(AppContext.BaseDirectory + $"pyscripts\\{scriptName}.py"))
                 throw new FileNotFoundException(TurkishStrings.ExcpMsg_ScriptNotFound, AppContext.BaseDirectory + scriptName);
@@ -90,7 +91,7 @@ namespace mltoolcli
             }
         }
 
-        private static void PrintHelp(string command)
+        private static void SyntaxMesaji(string command)
         {
             switch (command)
             {
