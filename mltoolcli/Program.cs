@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
+// ReSharper disable HeapView.ObjectAllocation.Evident
 
 // ReSharper disable once IdentifierTypo
 namespace mltoolcli
@@ -96,11 +97,10 @@ namespace mltoolcli
         /// <param name="scriptName">Name of needed script</param>
         /// <param name="additionalArgs">Any additional arguments, these will be concatenated to script path</param>
         /// <exception cref="FileNotFoundException">May throw this exception if script file is not found</exception>
-        /// <exception cref="NotImplementedException"></exception>
         private static void CallScript(string scriptName, string additionalArgs)
         {
-            if (!File.Exists($"{AppContext.BaseDirectory}pyscripts/{scriptName}.py") && !File.Exists(AppContext.BaseDirectory + $"pyscripts\\{scriptName}.py"))
-                throw new FileNotFoundException(TurkishStrings.ExcpMsg_ScriptNotFound, AppContext.BaseDirectory + scriptName);
+            if (!File.Exists($"{AppContext.BaseDirectory}pyscripts/{scriptName}.py") && !File.Exists($"{AppContext.BaseDirectory}pyscripts\\{scriptName}.py"))
+                throw new FileNotFoundException(TurkishStrings.ExcpMsg_ScriptNotFound, $"{AppContext.BaseDirectory}{scriptName}");
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
@@ -129,6 +129,7 @@ namespace mltoolcli
                 double result = 0;
                 for (int i = 0; i < 6; i++)
                     result += _modelContent[i] * Math.Pow(number, 5 - i);
+                // ReSharper disable once HeapView.BoxingAllocation
                 Console.WriteLine($@"{_modelName}({number}) = {result}");
             }
         }
