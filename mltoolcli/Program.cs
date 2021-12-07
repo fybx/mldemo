@@ -1,12 +1,21 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection.Metadata.Ecma335;
 using System.Runtime.InteropServices;
 
 namespace mltoolcli
 {
     internal static class Program
     {
+        private static double[] ModelContent;
+        private static string ModelName;
+        private static string ModelPath;
+        
+        private static string DatasetName;
+        private static string DatasetPath;
+        private static int[] DatasetContent;
+        
         private static void Main(string[] args)
         {
             if (args.Length is 0)
@@ -48,6 +57,10 @@ namespace mltoolcli
                     break;
 
                 case "eval":
+                    if (args.Length is 2 && double.TryParse(args[1], out double numberInput))
+                        Calculate(numberInput);
+                    else
+                        PrintHelp("eval");
                     break;
                 
                 case "train":
@@ -90,6 +103,19 @@ namespace mltoolcli
             }
         }
 
+        private static void Calculate(double number)
+        {
+            if (ModelContent is null || ModelName is null)
+                Console.WriteLine("mltool: [HATA] Model ismi veya model içeriği bulunamadı. Modeli 'load' komutu ile yüklediğinize emin misiniz?");
+            else
+            {
+                double result = 0;
+                for (int i = 0; i < 6; i++)
+                    result += ModelContent[i] * Math.Pow(number, 5 - i);
+                Console.WriteLine($@"{ModelName}({number}) = {result}");
+            }
+        }
+        
         private static void PrintHelp(string command)
         {
             switch (command)
