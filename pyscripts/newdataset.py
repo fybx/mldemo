@@ -1,5 +1,6 @@
 import random
 import sys
+import os
 
 print("mltool (pyscripts): [BİLGİ] yeni veri seti yaratılıyor!")
 try:
@@ -23,8 +24,7 @@ ylen = len(yvals)
 
 with open(fileloc, 'w') as f:
     f.write("mltool veri seti\n")
-    f.write("%s," % xlen)
-    f.write("%s\n" % ylen)
+    f.write(os.path.basename(fileloc).split('.')[0] + '\n')
     for item in xvals:
         f.write("%s\n" % item)
     for item in yvals:
