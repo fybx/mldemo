@@ -104,13 +104,23 @@ namespace mltoolcli
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
-                ProcessStartInfo info = new() { FileName = "python3", Arguments = $"{AppContext.BaseDirectory}pyscripts/{scriptName}.py {additionalArgs}" };
+                ProcessStartInfo info = new()
+                {
+                    FileName = "python3",
+                    Arguments = $"{AppContext.BaseDirectory}pyscripts/{scriptName}.py {additionalArgs}"
+                };
                 Process prc = new() { StartInfo = info };
                 prc.Start();   
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                throw new NotImplementedException();
+                ProcessStartInfo info = new()
+                {
+                    FileName = "python3",
+                    Arguments = $"{AppContext.BaseDirectory}pyscripts\\{scriptName}.py {additionalArgs}"
+                };
+                Process prc = new() { StartInfo = info };
+                prc.Start();
             }
             else
             {
