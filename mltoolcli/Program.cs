@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace mltoolcli
 {
@@ -95,6 +96,8 @@ namespace mltoolcli
         /// <exception cref="NotImplementedException"></exception>
         private static void CallScript(string scriptName, string additionalArgs)
         {
+            Thread.Sleep(500);
+            
             if (!File.Exists($"{AppContext.BaseDirectory}pyscripts/{scriptName}.py") && !File.Exists(AppContext.BaseDirectory + $"pyscripts\\{scriptName}.py"))
                 throw new FileNotFoundException(TurkishStrings.ExcpMsg_ScriptNotFound, AppContext.BaseDirectory + scriptName);
 
@@ -112,6 +115,8 @@ namespace mltoolcli
             {
                 Console.WriteLine(@"mltool: Ewww");
             }
+            
+            Thread.Sleep(500);
         }
 
         private static void Calculate(double number)
