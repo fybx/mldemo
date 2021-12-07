@@ -67,8 +67,13 @@ namespace mltoolcli
                     break;
                 
                 case "train":
+                    // ReSharper disable once ConvertIfStatementToSwitchStatement
                     if (args.Length is 1 && DatasetName is not null && DatasetContent is not null && ModelName is not null && ModelContent is not null)
                         CallScript("trainmodel", $"{DatasetPath} {ModelPath}");
+                    else if (args.Length is 1)
+                        Console.WriteLine("mltool: [HATA] 'load' komutunu kullanarak model ve veri seti yüklediniz mi?");
+                    else
+                        PrintHelp("train");
                     break;
                 
                 case "load":
@@ -79,6 +84,8 @@ namespace mltoolcli
                         else
                             ValidateFile(args[1]);
                     }
+                    else
+                        PrintHelp("load");
                     break;
 
                 default:
