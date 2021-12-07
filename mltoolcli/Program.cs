@@ -66,6 +66,8 @@ namespace mltoolcli
                     break;
                 
                 case "train":
+                    if (args.Length is 1 && DatasetName is not null && DatasetContent is not null && ModelName is not null && ModelContent is not null)
+                        CallScript("trainmodel", $"{DatasetPath} {ModelPath}");
                     break;
                 
                 case "load":
