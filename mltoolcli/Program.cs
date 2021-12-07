@@ -141,8 +141,9 @@ namespace mltoolcli
                 case 66 when lines[0] is @"mltool veri seti":
                     DatasetPath = path;
                     DatasetName = lines[1];
+                    DatasetContent = new int[64];
                     for (int j = 2; j < 66; j++)
-                        DatasetContent[j - 2] = double.Parse(lines[j]);
+                        DatasetContent[j - 2] = int.Parse(lines[j]);
                     break;
                 
                 default:
