@@ -60,4 +60,25 @@
     <data name="Syntax_New2" xml:space="preserve">
         <value>  new dataset [name]   İsmi [name] olarak verilen ve rastgele veri içeren veri setini yaratır. Dosya program klasöründe oluşturulur</value>
     </data>
+    <data name="Syntax_Load0" xml:space="preserve">
+        <value>  load help             Bu mesajı gösterir</value>
+    </data>
+    <data name="Syntax_Load1" xml:space="preserve">
+        <value>  load model [path]     [path] model dosyasını okur, doğrular ve train/eval için kullanılmak üzere belleğe kaydeder</value>
+    </data>
+    <data name="Syntax_Load2" xml:space="preserve">
+        <value>  load dataset [path]   [path] dataset dosyasını okur, doğrular ve train için kullanılmak üzere belleğe kaydeder</value>
+    </data>
+    <data name="Syntax_Train0" xml:space="preserve">
+        <value>  train help   Bu mesajı gösterir</value>
+    </data>
+    <data name="Syntax_Train1" xml:space="preserve">
+        <value>  train        load komutu ile belleğe yüklenen dataset dosyasını kullanarak modeli eğitir</value>
+    </data>
+    <data name="Syntax_Eval0" xml:space="preserve">
+        <value>  eval help   Bu mesajı gösterir</value>
+    </data>
+    <data name="Syntax_Eval1" xml:space="preserve">
+        <value>  eval        Kullanıcıdan alınan sayının belleğe yüklenen model dosyasında ifade edilen fonksiyon altında görüntüsünü hesaplar</value>
+    </data>
 </root>

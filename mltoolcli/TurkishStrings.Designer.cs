@@ -128,5 +128,47 @@ namespace mltoolcli {
                 return ResourceManager.GetString("Syntax_New2", resourceCulture);
             }
         }
+        
+        internal static string Syntax_Load0 {
+            get {
+                return ResourceManager.GetString("Syntax_Load0", resourceCulture);
+            }
+        }
+        
+        internal static string Syntax_Load1 {
+            get {
+                return ResourceManager.GetString("Syntax_Load1", resourceCulture);
+            }
+        }
+        
+        internal static string Syntax_Load2 {
+            get {
+                return ResourceManager.GetString("Syntax_Load2", resourceCulture);
+            }
+        }
+        
+        internal static string Syntax_Train0 {
+            get {
+                return ResourceManager.GetString("Syntax_Train0", resourceCulture);
+            }
+        }
+        
+        internal static string Syntax_Train1 {
+            get {
+                return ResourceManager.GetString("Syntax_Train1", resourceCulture);
+            }
+        }
+        
+        internal static string Syntax_Eval0 {
+            get {
+                return ResourceManager.GetString("Syntax_Eval0", resourceCulture);
+            }
+        }
+        
+        internal static string Syntax_Eval1 {
+            get {
+                return ResourceManager.GetString("Syntax_Eval1", resourceCulture);
+            }
+        }
     }
 }
