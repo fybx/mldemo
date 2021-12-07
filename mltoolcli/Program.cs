@@ -11,13 +11,9 @@ namespace mltoolcli
 {
     internal static class Program
     {
-        private static double[] ModelContent;
-        private static string ModelName;
-        private static string ModelPath;
-        
-        private static string DatasetName;
-        private static string DatasetPath;
-        private static int[] DatasetContent;
+        private static int[] _datasetContent;
+        private static string _modelName;
+        private static double[] _modelContent;
         
         private static void Main(string[] args)
         {
@@ -60,7 +56,7 @@ namespace mltoolcli
                     break;
 
                 case "eval":
-                    if (args.Length is 2 && double.TryParse(args[1], out double numberInput))
+                    if (args.Length is 3 && ValidateFile(args[1]) && double.TryParse(args[2], out double numberInput))
                         Calculate(numberInput);
                     else
                         PrintHelp("eval");
@@ -68,9 +64,9 @@ namespace mltoolcli
                 
                 case "train":
                     // ReSharper disable once ConvertIfStatementToSwitchStatement
-                    if (args.Length is 1 && DatasetName is not null && DatasetContent is not null && ModelName is not null && ModelContent is not null)
-                        CallScript("trainmodel", $"{DatasetPath} {ModelPath}");
-                    else if (args.Length is 1)
+                    if (args.Length is 3 && ValidateFile(args[1]) && ValidateFile(args[2]))
+                        CallScript("trainmodel", $"{args[1]} {args[2]}");
+                    else if (args.Length is 3)
                         Console.WriteLine("mltool: [HATA] 'load' komutunu kullanarak model ve veri seti yüklediniz mi?");
                     else
                         PrintHelp("train");
@@ -103,8 +99,6 @@ namespace mltoolcli
         /// <exception cref="NotImplementedException"></exception>
         private static void CallScript(string scriptName, string additionalArgs)
         {
-            Thread.Sleep(500);
-            
             if (!File.Exists($"{AppContext.BaseDirectory}pyscripts/{scriptName}.py") && !File.Exists(AppContext.BaseDirectory + $"pyscripts\\{scriptName}.py"))
                 throw new FileNotFoundException(TurkishStrings.ExcpMsg_ScriptNotFound, AppContext.BaseDirectory + scriptName);
 
@@ -123,46 +117,43 @@ namespace mltoolcli
                 Console.WriteLine(@"mltool: Ewww");
             }
             
-            Thread.Sleep(500);
+            Thread.Sleep(1000);
         }
 
         private static void Calculate(double number)
         {
-            if (ModelContent is null || ModelName is null)
+            if (_modelContent is null || _modelName is null)
                 Console.WriteLine("mltool: [HATA] Model ismi veya model içeriği bulunamadı. Modeli 'load' komutu ile yüklediğinize emin misiniz?");
             else
             {
                 double result = 0;
                 for (int i = 0; i < 6; i++)
-                    result += ModelContent[i] * Math.Pow(number, 5 - i);
-                Console.WriteLine($@"{ModelName}({number}) = {result}");
+                    result += _modelContent[i] * Math.Pow(number, 5 - i);
+                Console.WriteLine($@"{_modelName}({number}) = {result}");
             }
         }
 
-        private static void ValidateFile(string path)
+        private static bool ValidateFile(string path)
         {
             List<string> lines = File.ReadAllLines(path).ToList();
             switch (lines.Count)
             {
                 case 8 when lines[0] is @"mltool modeli":
-                    ModelPath = path;
-                    ModelName = lines[1];
-                    ModelContent = new double[6];
+                    _modelContent = new double[6];
+                    _modelName = lines[1];
                     for (int i = 2; i < 8; i++)
-                        ModelContent[i - 2] = double.Parse(lines[i]);
-                    break;
+                        _modelContent[i - 2] = double.Parse(lines[i]);
+                    return true;
                 
                 case 66 when lines[0] is @"mltool veri seti":
-                    DatasetPath = path;
-                    DatasetName = lines[1];
-                    DatasetContent = new int[64];
+                    _datasetContent = new int[64];
                     for (int j = 2; j < 66; j++)
-                        DatasetContent[j - 2] = int.Parse(lines[j]);
-                    break;
+                        _datasetContent[j - 2] = int.Parse(lines[j]);
+                    return true;
                 
                 default:
-                    Console.WriteLine($"mltool: [HATA] '{path}' dosyası tanınamadı.");
-                    break;
+                    Console.WriteLine($"mltool: [HATA] '{path}' dosyasının türü tanınamadı. Model veya veri seti dosyası seçmelisiniz!");
+                    return false;
             }
         }
         
