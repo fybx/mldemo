@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Reflection.Metadata.Ecma335;
 using System.Runtime.InteropServices;
 using System.Threading;
 
+// ReSharper disable once IdentifierTypo
 namespace mltoolcli
 {
     internal static class Program
@@ -67,7 +67,7 @@ namespace mltoolcli
                     if (args.Length is 3 && ValidateFile(args[1]) && ValidateFile(args[2]))
                         CallScript("trainmodel", $"{args[1]} {args[2]}");
                     else if (args.Length is 3)
-                        Console.WriteLine("mltool: [HATA] 'load' komutunu kullanarak model ve veri seti yüklediniz mi?");
+                        Console.WriteLine(TurkishStrings.ErrMsg_Train0);
                     else
                         PrintHelp("train");
                     break;
@@ -76,7 +76,7 @@ namespace mltoolcli
                     if (args.Length is 2)
                     {
                         if (!File.Exists(args[1]))
-                            Console.WriteLine("mltool: [HATA] Dosya bulunamadı veya açılamıyor.");
+                            Console.WriteLine(TurkishStrings.ErrMsg_Load0);
                         else
                             ValidateFile(args[1]);
                     }
@@ -85,7 +85,7 @@ namespace mltoolcli
                     break;
 
                 default:
-                    Console.WriteLine("mltool: '{0}' geçerli bir komut değil", args[0]);
+                    Console.WriteLine(TurkishStrings.ErrMsg_DefaultStatement, args[0]);
                     break;
             }
         }
@@ -123,7 +123,7 @@ namespace mltoolcli
         private static void Calculate(double number)
         {
             if (_modelContent is null || _modelName is null)
-                Console.WriteLine("mltool: [HATA] Model ismi veya model içeriği bulunamadı. Modeli 'load' komutu ile yüklediğinize emin misiniz?");
+                Console.WriteLine(TurkishStrings.ErrMsg_Calculate0);
             else
             {
                 double result = 0;
@@ -152,7 +152,7 @@ namespace mltoolcli
                     return true;
                 
                 default:
-                    Console.WriteLine($"mltool: [HATA] '{path}' dosyasının türü tanınamadı. Model veya veri seti dosyası seçmelisiniz!");
+                    Console.WriteLine(TurkishStrings.ErrMsg_ValidateFile0, path);
                     return false;
             }
         }

@@ -170,5 +170,35 @@ namespace mltoolcli {
                 return ResourceManager.GetString("Syntax_Eval1", resourceCulture);
             }
         }
+        
+        internal static string ErrMsg_Train0 {
+            get {
+                return ResourceManager.GetString("ErrMsg_Train0", resourceCulture);
+            }
+        }
+        
+        internal static string ErrMsg_Load0 {
+            get {
+                return ResourceManager.GetString("ErrMsg_Load0", resourceCulture);
+            }
+        }
+        
+        internal static string ErrMsg_DefaultStatement {
+            get {
+                return ResourceManager.GetString("ErrMsg_DefaultStatement", resourceCulture);
+            }
+        }
+        
+        internal static string ErrMsg_Calculate0 {
+            get {
+                return ResourceManager.GetString("ErrMsg_Calculate0", resourceCulture);
+            }
+        }
+        
+        internal static string ErrMsg_ValidateFile0 {
+            get {
+                return ResourceManager.GetString("ErrMsg_ValidateFile0", resourceCulture);
+            }
+        }
     }
 }

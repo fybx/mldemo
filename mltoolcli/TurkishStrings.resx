@@ -81,4 +81,19 @@
     <data name="Syntax_Eval1" xml:space="preserve">
         <value>  eval        Kullanıcıdan alınan sayının belleğe yüklenen model dosyasında ifade edilen fonksiyon altında görüntüsünü hesaplar</value>
     </data>
+    <data name="ErrMsg_Train0" xml:space="preserve">
+        <value>mltool: [HATA] 'load' komutunu kullanarak model ve veri seti yüklediniz mi?</value>
+    </data>
+    <data name="ErrMsg_Load0" xml:space="preserve">
+        <value>mltool: [HATA] Dosya bulunamadı veya açılamıyor.</value>
+    </data>
+    <data name="ErrMsg_DefaultStatement" xml:space="preserve">
+        <value>mltool: '{0}' geçerli bir komut değil</value>
+    </data>
+    <data name="ErrMsg_Calculate0" xml:space="preserve">
+        <value>mltool: [HATA] Model ismi veya model içeriği bulunamadı.</value>
+    </data>
+    <data name="ErrMsg_ValidateFile0" xml:space="preserve">
+        <value>mltool: [HATA] '{0}' dosyasının türü tanınamadı. Model veya veri seti dosyası seçmelisiniz!</value>
+    </data>
 </root>
