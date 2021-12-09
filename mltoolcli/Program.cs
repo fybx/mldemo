@@ -72,18 +72,6 @@ namespace mltoolcli
                     else
                         PrintHelp("train");
                     break;
-                
-                case "load":
-                    if (args.Length is 2)
-                    {
-                        if (!File.Exists(args[1]))
-                            Console.WriteLine(TurkishStrings.ErrMsg_Load0);
-                        else
-                            ValidateFile(args[1]);
-                    }
-                    else
-                        PrintHelp("load");
-                    break;
 
                 default:
                     Console.WriteLine(TurkishStrings.ErrMsg_DefaultStatement, args[0]);
