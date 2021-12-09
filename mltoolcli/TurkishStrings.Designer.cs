@@ -51,12 +51,6 @@ namespace mltoolcli {
             }
         }
         
-        internal static string HelpMsg_Exit {
-            get {
-                return ResourceManager.GetString("HelpMsg_Exit", resourceCulture);
-            }
-        }
-        
         internal static string HelpMsg_Train {
             get {
                 return ResourceManager.GetString("HelpMsg_Train", resourceCulture);

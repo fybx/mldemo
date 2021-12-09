@@ -21,9 +21,6 @@
     <data name="HelpMsg_Help" xml:space="preserve">
         <value>  help       Bu mesajı gösterir</value>
     </data>
-    <data name="HelpMsg_Exit" xml:space="preserve">
-        <value>  exit       CLI'ten çıkar</value>
-    </data>
     <data name="HelpMsg_Train" xml:space="preserve">
         <value>  train      Yüklü olan eğitim veri setini kullanarak yüklü olan modeli eğitir</value>
     </data>
