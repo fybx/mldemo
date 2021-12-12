@@ -166,9 +166,8 @@ namespace mltoolcli
                     Console.WriteLine('\n' + TurkishStrings.HelpMsg_ListName);
                     Console.WriteLine(TurkishStrings.HelpMsg_Help);
                     Console.WriteLine(TurkishStrings.HelpMsg_New);
-                    Console.WriteLine(TurkishStrings.HelpMsg_Test);
                     Console.WriteLine(TurkishStrings.HelpMsg_Train);
-                    Console.WriteLine(TurkishStrings.HelpMsg_Load);
+                    Console.WriteLine(TurkishStrings.HelpMsg_Eval);
                     Console.WriteLine('\n' + TurkishStrings.HelpMsg_Info);
                     break;
                 

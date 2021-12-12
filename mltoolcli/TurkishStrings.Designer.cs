@@ -45,6 +45,12 @@ namespace mltoolcli {
             }
         }
         
+        internal static string Version {
+            get {
+                return ResourceManager.GetString("Version", resourceCulture);
+            }
+        }
+        
         internal static string HelpMsg_Help {
             get {
                 return ResourceManager.GetString("HelpMsg_Help", resourceCulture);
@@ -56,19 +62,12 @@ namespace mltoolcli {
                 return ResourceManager.GetString("HelpMsg_Train", resourceCulture);
             }
         }
-        
-        internal static string HelpMsg_Test {
-            get {
-                return ResourceManager.GetString("HelpMsg_Test", resourceCulture);
-            }
+
+        internal static string HelpMsg_Eval
+        {
+            get { return ResourceManager.GetString("HelpMsg_Eval", resourceCulture); }
         }
-        
-        internal static string HelpMsg_Load {
-            get {
-                return ResourceManager.GetString("HelpMsg_Load", resourceCulture);
-            }
-        }
-        
+
         internal static string HelpMsg_New {
             get {
                 return ResourceManager.GetString("HelpMsg_New", resourceCulture);
@@ -92,13 +91,7 @@ namespace mltoolcli {
                 return ResourceManager.GetString("HelpMsg_Info", resourceCulture);
             }
         }
-        
-        internal static string Version {
-            get {
-                return ResourceManager.GetString("Version", resourceCulture);
-            }
-        }
-        
+
         internal static string HelpMsg_ListName {
             get {
                 return ResourceManager.GetString("HelpMsg_ListName", resourceCulture);
@@ -120,24 +113,6 @@ namespace mltoolcli {
         internal static string Syntax_New2 {
             get {
                 return ResourceManager.GetString("Syntax_New2", resourceCulture);
-            }
-        }
-        
-        internal static string Syntax_Load0 {
-            get {
-                return ResourceManager.GetString("Syntax_Load0", resourceCulture);
-            }
-        }
-        
-        internal static string Syntax_Load1 {
-            get {
-                return ResourceManager.GetString("Syntax_Load1", resourceCulture);
-            }
-        }
-        
-        internal static string Syntax_Load2 {
-            get {
-                return ResourceManager.GetString("Syntax_Load2", resourceCulture);
             }
         }
         
@@ -170,13 +145,7 @@ namespace mltoolcli {
                 return ResourceManager.GetString("ErrMsg_Train0", resourceCulture);
             }
         }
-        
-        internal static string ErrMsg_Load0 {
-            get {
-                return ResourceManager.GetString("ErrMsg_Load0", resourceCulture);
-            }
-        }
-        
+
         internal static string ErrMsg_DefaultStatement {
             get {
                 return ResourceManager.GetString("ErrMsg_DefaultStatement", resourceCulture);
