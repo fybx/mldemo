@@ -2,18 +2,19 @@
 
 mkdir -p artifacts
 
-echo "Clean-up artifacts"
-cd artifacts
-rm -rf *
-cd ..
+echo "1. Clean up artifacts folder"
+rm -rf ./artifacts/*
 
-echo "Building mltoolcli"
+echo "2. Clean up build output folder"
+rm -rf ./mltoolcli/bin/Release/net6.0/*
+
+echo "3. Build mltoolcli for Release"
 dotnet build --nologo --verbosity minimal --configuration Release
 
-echo "Copy build artifacts to artifacts folder"
+echo "4. Copy mltoolcli to artifacts"
 cp -ar mltoolcli/bin/Release/net6.0/. artifacts
 
-echo "Copy pyscripts folder to artifacts folder"
+echo "5. Copy pyscripts folder to artifacts"
 cp -ar pyscripts artifacts
 
-echo "Process complete. You can run the application with './mltoolcli' or 'sh run_mltoolcli.sh'"
+echo "Build script completed."
