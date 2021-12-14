@@ -67,4 +67,16 @@ public partial class MainForm : Form
                 return false;
         }
     }
+
+    private void tsmiNewDataset_Click(object sender, EventArgs e)
+    {
+        using InputDialog dialog = new("dataset");
+        DialogResult result = dialog.ShowDialog();
+        if (result is DialogResult.OK && dialog.FileName is not null)
+        {
+            string path = $"{AppContext.BaseDirectory}{(dialog.FileName.EndsWith(".dataset") ? dialog.FileName : $"{dialog.FileName}.dataset")}";
+            File.Create(path).Close();
+            CallScript(@"newdataset", path);
+        }
+    }
 }
