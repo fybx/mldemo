@@ -56,12 +56,14 @@ public partial class MainForm : Form
                 model = new double[6];
                 for (int i = 2; i < 8; i++)
                     model[i - 2] = double.Parse(lines[i]);
+                pathModelFile = path;
                 return true;
 
             case 66 when lines[0] is @"mltool veri seti":
                 dataset = new int[64];
                 for (int j = 2; j < 66; j++)
                     dataset[j - 2] = int.Parse(lines[j]);
+                pathDatasetFile = path;
                 return true;
 
             default:
@@ -100,5 +102,29 @@ public partial class MainForm : Form
             File.Create(path).Close();
             CallScript(@"newmodel", path);
         }
+    }
+
+    private void tsmiLoadDataset_Click(object sender, EventArgs e)
+    {
+        OpenFileDialog ofd = new()
+        {
+            Filter = "Data set file|*.dataset",
+            Title = "Load a data set file"
+        };
+
+        if (ofd.ShowDialog() is DialogResult.OK)
+            ValidateFile(ofd.FileName);
+    }
+
+    private void tsmiLoadModel_Click(object sender, EventArgs e)
+    {
+        OpenFileDialog ofd = new()
+        {
+            Filter = "Model file|*.model",
+            Title = "Load a model file"
+        };
+
+        if (ofd.ShowDialog() is DialogResult.OK)
+            ValidateFile(ofd.FileName);
     }
 }

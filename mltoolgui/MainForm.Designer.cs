@@ -80,14 +80,14 @@ partial class MainForm
             // tsmiNewDataset
             // 
             this.tsmiNewDataset.Name = "tsmiNewDataset";
-            this.tsmiNewDataset.Size = new System.Drawing.Size(180, 22);
+            this.tsmiNewDataset.Size = new System.Drawing.Size(116, 22);
             this.tsmiNewDataset.Text = "Data set";
             this.tsmiNewDataset.Click += new System.EventHandler(this.tsmiNewDataset_Click);
             // 
             // tsmiNewModel
             // 
             this.tsmiNewModel.Name = "tsmiNewModel";
-            this.tsmiNewModel.Size = new System.Drawing.Size(180, 22);
+            this.tsmiNewModel.Size = new System.Drawing.Size(116, 22);
             this.tsmiNewModel.Text = "Model";
             this.tsmiNewModel.Click += new System.EventHandler(this.tsmiNewModel_Click);
             // 
@@ -103,14 +103,16 @@ partial class MainForm
             // tsmiLoadDataset
             // 
             this.tsmiLoadDataset.Name = "tsmiLoadDataset";
-            this.tsmiLoadDataset.Size = new System.Drawing.Size(116, 22);
+            this.tsmiLoadDataset.Size = new System.Drawing.Size(180, 22);
             this.tsmiLoadDataset.Text = "Data set";
+            this.tsmiLoadDataset.Click += new System.EventHandler(this.tsmiLoadDataset_Click);
             // 
             // tsmiLoadModel
             // 
             this.tsmiLoadModel.Name = "tsmiLoadModel";
-            this.tsmiLoadModel.Size = new System.Drawing.Size(116, 22);
+            this.tsmiLoadModel.Size = new System.Drawing.Size(180, 22);
             this.tsmiLoadModel.Text = "Model";
+            this.tsmiLoadModel.Click += new System.EventHandler(this.tsmiLoadModel_Click);
             // 
             // tsmiDropboxActions
             // 
