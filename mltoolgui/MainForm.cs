@@ -13,6 +13,8 @@ public partial class MainForm : Form
 
     public MainForm() => InitializeComponent();
 
+    private void MainForm_Load(object sender, EventArgs e) => Where();
+
     private void btnTrain_Click(object sender, EventArgs e)
     {
         if (string.IsNullOrEmpty(pathModelFile) || string.IsNullOrEmpty(pathDatasetFile))
@@ -66,6 +68,14 @@ public partial class MainForm : Form
                 MessageBox.Show($"File {path} is not recognized. Model or data set file must be selected!", "Warning!");
                 return false;
         }
+    }
+
+    private static void Where()
+    {
+        string run = AppContext.BaseDirectory;
+        string pyt = $"{run}pyscripts\\";
+        bool avpyt = Directory.Exists(pyt);
+        MessageBox.Show("mltoolgui could not locate \'pyscripts\' folder in running directory. Have you used build script to compile this application?", "Fatal Error!");
     }
 
     private void tsmiNewDataset_Click(object sender, EventArgs e)
