@@ -65,7 +65,7 @@ partial class MainForm
             this.tsmiExit});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(473, 24);
+            this.menuStrip.Size = new System.Drawing.Size(604, 24);
             this.menuStrip.TabIndex = 0;
             // 
             // tsmiDropboxNew
@@ -103,14 +103,14 @@ partial class MainForm
             // tsmiLoadDataset
             // 
             this.tsmiLoadDataset.Name = "tsmiLoadDataset";
-            this.tsmiLoadDataset.Size = new System.Drawing.Size(180, 22);
+            this.tsmiLoadDataset.Size = new System.Drawing.Size(116, 22);
             this.tsmiLoadDataset.Text = "Data set";
             this.tsmiLoadDataset.Click += new System.EventHandler(this.tsmiLoadDataset_Click);
             // 
             // tsmiLoadModel
             // 
             this.tsmiLoadModel.Name = "tsmiLoadModel";
-            this.tsmiLoadModel.Size = new System.Drawing.Size(180, 22);
+            this.tsmiLoadModel.Size = new System.Drawing.Size(116, 22);
             this.tsmiLoadModel.Text = "Model";
             this.tsmiLoadModel.Click += new System.EventHandler(this.tsmiLoadModel_Click);
             // 
@@ -128,12 +128,14 @@ partial class MainForm
             this.tsmiTrain.Name = "tsmiTrain";
             this.tsmiTrain.Size = new System.Drawing.Size(118, 22);
             this.tsmiTrain.Text = "Train";
+            this.tsmiTrain.Click += new System.EventHandler(this.tsmiTrain_Click);
             // 
             // tsmiEvaluate
             // 
             this.tsmiEvaluate.Name = "tsmiEvaluate";
             this.tsmiEvaluate.Size = new System.Drawing.Size(118, 22);
             this.tsmiEvaluate.Text = "Evaluate";
+            this.tsmiEvaluate.Click += new System.EventHandler(this.tsmiEvaluate_Click);
             // 
             // tsmiExit
             // 
@@ -164,7 +166,7 @@ partial class MainForm
             // 
             this.splitContainer.Panel2.Controls.Add(this.textBox1);
             this.splitContainer.Panel2.Controls.Add(this.rtbEvaluate);
-            this.splitContainer.Size = new System.Drawing.Size(473, 426);
+            this.splitContainer.Size = new System.Drawing.Size(604, 427);
             this.splitContainer.SplitterDistance = 113;
             this.splitContainer.TabIndex = 1;
             // 
@@ -177,6 +179,7 @@ partial class MainForm
             this.btnEvaluate.TabIndex = 12;
             this.btnEvaluate.Text = "Evaluate";
             this.btnEvaluate.UseVisualStyleBackColor = true;
+            this.btnEvaluate.Click += new System.EventHandler(this.btnEvaluate_Click);
             // 
             // btnTrain
             // 
@@ -229,12 +232,13 @@ partial class MainForm
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.textBox1.ForeColor = System.Drawing.Color.Turquoise;
-            this.textBox1.Location = new System.Drawing.Point(0, 284);
+            this.textBox1.Location = new System.Drawing.Point(0, 285);
             this.textBox1.Name = "textBox1";
             this.textBox1.PlaceholderText = "enter a number";
-            this.textBox1.Size = new System.Drawing.Size(471, 23);
+            this.textBox1.Size = new System.Drawing.Size(602, 23);
             this.textBox1.TabIndex = 1;
             this.textBox1.Text = "beep boop?";
+            this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
             // 
             // rtbEvaluate
             // 
@@ -247,7 +251,7 @@ partial class MainForm
             this.rtbEvaluate.Name = "rtbEvaluate";
             this.rtbEvaluate.ReadOnly = true;
             this.rtbEvaluate.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.rtbEvaluate.Size = new System.Drawing.Size(471, 307);
+            this.rtbEvaluate.Size = new System.Drawing.Size(602, 307);
             this.rtbEvaluate.TabIndex = 0;
             this.rtbEvaluate.Text = "beep boop? boop beep.";
             // 
@@ -256,7 +260,7 @@ partial class MainForm
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlText;
-            this.ClientSize = new System.Drawing.Size(473, 450);
+            this.ClientSize = new System.Drawing.Size(604, 451);
             this.Controls.Add(this.splitContainer);
             this.Controls.Add(this.menuStrip);
             this.DoubleBuffered = true;
