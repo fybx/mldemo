@@ -74,8 +74,8 @@ public partial class MainForm : Form
     {
         string run = AppContext.BaseDirectory;
         string pyt = $"{run}pyscripts\\";
-        bool avpyt = Directory.Exists(pyt);
-        MessageBox.Show("mltoolgui could not locate \'pyscripts\' folder in running directory. Have you used build script to compile this application?", "Fatal Error!");
+        if (!Directory.Exists(pyt))
+            MessageBox.Show("mltoolgui could not locate \'pyscripts\' folder in running directory. Have you used build script to compile this application?", "Fatal Error!");
     }
 
     private void tsmiNewDataset_Click(object sender, EventArgs e)
