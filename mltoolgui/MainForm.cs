@@ -1,5 +1,6 @@
 // ReSharper disable once IdentifierTypo
 using System.Diagnostics;
+
 namespace mltoolgui;
 
 public partial class MainForm : Form
@@ -11,9 +12,15 @@ public partial class MainForm : Form
     private int[]? dataset;
 
     public MainForm() => InitializeComponent();
-    public MainForm()
+
+    private void btnTrain_Click(object sender, EventArgs e)
     {
-        InitializeComponent();
+        if (string.IsNullOrEmpty(pathModelFile) || string.IsNullOrEmpty(pathDatasetFile))
+            MessageBox.Show("Add a data set and a model file to start", "Warning!");
+        else
+            CallScript("trainmodel", $"{pathDatasetFile} {pathModelFile}");
+    }
+
     private static void CallScript(string scriptName, string arguments)
     {
         ProcessStartInfo info = new()
