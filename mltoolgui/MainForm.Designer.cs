@@ -140,6 +140,7 @@ partial class MainForm
             this.tsmiExit.Name = "tsmiExit";
             this.tsmiExit.Size = new System.Drawing.Size(38, 20);
             this.tsmiExit.Text = "Exit";
+            this.tsmiExit.Click += new System.EventHandler(this.tsmiExit_Click);
             // 
             // splitContainer
             // 

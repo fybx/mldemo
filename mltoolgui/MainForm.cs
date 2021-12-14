@@ -127,4 +127,5 @@ public partial class MainForm : Form
         if (ofd.ShowDialog() is DialogResult.OK)
             ValidateFile(ofd.FileName);
     }
+    private void tsmiExit_Click(object sender, EventArgs e) => Close();
 }
