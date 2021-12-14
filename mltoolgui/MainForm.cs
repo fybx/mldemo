@@ -89,4 +89,16 @@ public partial class MainForm : Form
             CallScript(@"newdataset", path);
         }
     }
+
+    private void tsmiNewModel_Click(object sender, EventArgs e)
+    {
+        using InputDialog dialog = new("model");
+        DialogResult result = dialog.ShowDialog();
+        if (result is DialogResult.OK && dialog.FileName is not null)
+        {
+            string path = $"{AppContext.BaseDirectory}{(dialog.FileName.EndsWith(".model") ? dialog.FileName : $"{dialog.FileName}.model")}";
+            File.Create(path).Close();
+            CallScript(@"newmodel", path);
+        }
+    }
 }

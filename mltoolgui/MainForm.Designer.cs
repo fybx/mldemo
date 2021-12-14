@@ -89,6 +89,7 @@ partial class MainForm
             this.tsmiNewModel.Name = "tsmiNewModel";
             this.tsmiNewModel.Size = new System.Drawing.Size(180, 22);
             this.tsmiNewModel.Text = "Model";
+            this.tsmiNewModel.Click += new System.EventHandler(this.tsmiNewModel_Click);
             // 
             // tsmiDropboxLoad
             // 
