@@ -47,8 +47,8 @@ partial class MainForm
             this.lblModelPath = new System.Windows.Forms.Label();
             this.@__lblDataset = new System.Windows.Forms.Label();
             this.@__lblModel = new System.Windows.Forms.Label();
-            this.rtbEvaluate = new System.Windows.Forms.RichTextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.rtbEvaluate = new System.Windows.Forms.RichTextBox();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -80,13 +80,14 @@ partial class MainForm
             // tsmiNewDataset
             // 
             this.tsmiNewDataset.Name = "tsmiNewDataset";
-            this.tsmiNewDataset.Size = new System.Drawing.Size(116, 22);
+            this.tsmiNewDataset.Size = new System.Drawing.Size(180, 22);
             this.tsmiNewDataset.Text = "Data set";
+            this.tsmiNewDataset.Click += new System.EventHandler(this.tsmiNewDataset_Click);
             // 
             // tsmiNewModel
             // 
             this.tsmiNewModel.Name = "tsmiNewModel";
-            this.tsmiNewModel.Size = new System.Drawing.Size(116, 22);
+            this.tsmiNewModel.Size = new System.Drawing.Size(180, 22);
             this.tsmiNewModel.Text = "Model";
             // 
             // tsmiDropboxLoad
@@ -218,6 +219,19 @@ partial class MainForm
             this.@__lblModel.TabIndex = 7;
             this.@__lblModel.Text = "Current model file:";
             // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.Color.Black;
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.textBox1.ForeColor = System.Drawing.Color.Turquoise;
+            this.textBox1.Location = new System.Drawing.Point(0, 284);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.PlaceholderText = "enter a number";
+            this.textBox1.Size = new System.Drawing.Size(471, 23);
+            this.textBox1.TabIndex = 1;
+            this.textBox1.Text = "beep boop?";
+            // 
             // rtbEvaluate
             // 
             this.rtbEvaluate.BackColor = System.Drawing.Color.Black;
@@ -232,19 +246,6 @@ partial class MainForm
             this.rtbEvaluate.Size = new System.Drawing.Size(471, 307);
             this.rtbEvaluate.TabIndex = 0;
             this.rtbEvaluate.Text = "beep boop? boop beep.";
-            // 
-            // textBox1
-            // 
-            this.textBox1.BackColor = System.Drawing.Color.Black;
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.textBox1.ForeColor = System.Drawing.Color.Turquoise;
-            this.textBox1.Location = new System.Drawing.Point(0, 284);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.PlaceholderText = "enter a number";
-            this.textBox1.Size = new System.Drawing.Size(471, 23);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.Text = "beep boop?";
             // 
             // MainForm
             // 
