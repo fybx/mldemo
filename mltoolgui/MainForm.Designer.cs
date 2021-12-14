@@ -30,7 +30,6 @@ partial class MainForm
     private void InitializeComponent()
     {
             this.menuStrip = new System.Windows.Forms.MenuStrip();
-            this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDropboxNew = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiNewDataset = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiNewModel = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,6 +39,7 @@ partial class MainForm
             this.tsmiDropboxActions = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrain = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiEvaluate = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.btnEvaluate = new System.Windows.Forms.Button();
             this.btnTrain = new System.Windows.Forms.Button();
@@ -48,6 +48,7 @@ partial class MainForm
             this.@__lblDataset = new System.Windows.Forms.Label();
             this.@__lblModel = new System.Windows.Forms.Label();
             this.rtbEvaluate = new System.Windows.Forms.RichTextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -66,13 +67,6 @@ partial class MainForm
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(473, 24);
             this.menuStrip.TabIndex = 0;
-            this.menuStrip.Text = "";
-            // 
-            // tsmiExit
-            // 
-            this.tsmiExit.Name = "tsmiExit";
-            this.tsmiExit.Size = new System.Drawing.Size(38, 20);
-            this.tsmiExit.Text = "Exit";
             // 
             // tsmiDropboxNew
             // 
@@ -86,13 +80,13 @@ partial class MainForm
             // tsmiNewDataset
             // 
             this.tsmiNewDataset.Name = "tsmiNewDataset";
-            this.tsmiNewDataset.Size = new System.Drawing.Size(180, 22);
+            this.tsmiNewDataset.Size = new System.Drawing.Size(116, 22);
             this.tsmiNewDataset.Text = "Data set";
             // 
             // tsmiNewModel
             // 
             this.tsmiNewModel.Name = "tsmiNewModel";
-            this.tsmiNewModel.Size = new System.Drawing.Size(180, 22);
+            this.tsmiNewModel.Size = new System.Drawing.Size(116, 22);
             this.tsmiNewModel.Text = "Model";
             // 
             // tsmiDropboxLoad
@@ -107,13 +101,13 @@ partial class MainForm
             // tsmiLoadDataset
             // 
             this.tsmiLoadDataset.Name = "tsmiLoadDataset";
-            this.tsmiLoadDataset.Size = new System.Drawing.Size(180, 22);
+            this.tsmiLoadDataset.Size = new System.Drawing.Size(116, 22);
             this.tsmiLoadDataset.Text = "Data set";
             // 
             // tsmiLoadModel
             // 
             this.tsmiLoadModel.Name = "tsmiLoadModel";
-            this.tsmiLoadModel.Size = new System.Drawing.Size(180, 22);
+            this.tsmiLoadModel.Size = new System.Drawing.Size(116, 22);
             this.tsmiLoadModel.Text = "Model";
             // 
             // tsmiDropboxActions
@@ -128,14 +122,20 @@ partial class MainForm
             // tsmiTrain
             // 
             this.tsmiTrain.Name = "tsmiTrain";
-            this.tsmiTrain.Size = new System.Drawing.Size(180, 22);
+            this.tsmiTrain.Size = new System.Drawing.Size(118, 22);
             this.tsmiTrain.Text = "Train";
             // 
             // tsmiEvaluate
             // 
             this.tsmiEvaluate.Name = "tsmiEvaluate";
-            this.tsmiEvaluate.Size = new System.Drawing.Size(180, 22);
+            this.tsmiEvaluate.Size = new System.Drawing.Size(118, 22);
             this.tsmiEvaluate.Text = "Evaluate";
+            // 
+            // tsmiExit
+            // 
+            this.tsmiExit.Name = "tsmiExit";
+            this.tsmiExit.Size = new System.Drawing.Size(38, 20);
+            this.tsmiExit.Text = "Exit";
             // 
             // splitContainer
             // 
@@ -157,6 +157,7 @@ partial class MainForm
             // 
             // splitContainer.Panel2
             // 
+            this.splitContainer.Panel2.Controls.Add(this.textBox1);
             this.splitContainer.Panel2.Controls.Add(this.rtbEvaluate);
             this.splitContainer.Size = new System.Drawing.Size(473, 426);
             this.splitContainer.SplitterDistance = 113;
@@ -181,6 +182,7 @@ partial class MainForm
             this.btnTrain.TabIndex = 11;
             this.btnTrain.Text = "Train";
             this.btnTrain.UseVisualStyleBackColor = true;
+            this.btnTrain.Click += new System.EventHandler(this.btnTrain_Click);
             // 
             // lblDatasetFile
             // 
@@ -219,13 +221,30 @@ partial class MainForm
             // rtbEvaluate
             // 
             this.rtbEvaluate.BackColor = System.Drawing.Color.Black;
-            this.rtbEvaluate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtbEvaluate.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rtbEvaluate.Cursor = System.Windows.Forms.Cursors.Default;
+            this.rtbEvaluate.Dock = System.Windows.Forms.DockStyle.Top;
             this.rtbEvaluate.ForeColor = System.Drawing.Color.LightCoral;
             this.rtbEvaluate.Location = new System.Drawing.Point(0, 0);
             this.rtbEvaluate.Name = "rtbEvaluate";
+            this.rtbEvaluate.ReadOnly = true;
+            this.rtbEvaluate.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
             this.rtbEvaluate.Size = new System.Drawing.Size(471, 307);
             this.rtbEvaluate.TabIndex = 0;
             this.rtbEvaluate.Text = "beep boop? boop beep.";
+            // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.Color.Black;
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.textBox1.ForeColor = System.Drawing.Color.Turquoise;
+            this.textBox1.Location = new System.Drawing.Point(0, 284);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.PlaceholderText = "enter a number";
+            this.textBox1.Size = new System.Drawing.Size(471, 23);
+            this.textBox1.TabIndex = 1;
+            this.textBox1.Text = "beep boop?";
             // 
             // MainForm
             // 
@@ -249,6 +268,7 @@ partial class MainForm
             this.splitContainer.Panel1.ResumeLayout(false);
             this.splitContainer.Panel1.PerformLayout();
             this.splitContainer.Panel2.ResumeLayout(false);
+            this.splitContainer.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -277,4 +297,5 @@ partial class MainForm
     private Label __lblDataset;
     private Label __lblModel;
     private RichTextBox rtbEvaluate;
+    private TextBox textBox1;
 }
