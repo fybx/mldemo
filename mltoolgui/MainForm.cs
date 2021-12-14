@@ -127,5 +127,6 @@ public partial class MainForm : Form
         if (ofd.ShowDialog() is DialogResult.OK)
             ValidateFile(ofd.FileName);
     }
+    private void tsmiTrain_Click(object sender, EventArgs e) => btnTrain_Click(sender, e); // dirty but it works
     private void tsmiExit_Click(object sender, EventArgs e) => Close();
 }
