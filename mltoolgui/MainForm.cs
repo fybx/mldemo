@@ -9,6 +9,7 @@ public partial class MainForm : Form
     private string? pathDatasetFile;
 
     private double[]? model;
+    private string? modelname;
     private int[]? dataset;
 
     public MainForm() => InitializeComponent();
@@ -23,6 +24,17 @@ public partial class MainForm : Form
             CallScript("trainmodel", $"{pathDatasetFile} {pathModelFile}");
     }
 
+    private void btnEvaluate_Click(object sender, EventArgs e)
+    {
+        if (string.IsNullOrEmpty(pathModelFile))
+            MessageBox.Show("Add a model file to start", "Warning!");
+        else
+        {
+            MessageBox.Show("Use the text box below to crunch numbers. Enter 'exit' to exit evaluation shell.", "Information");
+            Lock(false);
+        }
+    }
+
     private static void CallScript(string scriptName, string arguments)
     {
         ProcessStartInfo info = new()
@@ -35,8 +47,8 @@ public partial class MainForm : Form
 
     private double Calculate(double number)
     {
-        if (string.IsNullOrEmpty(pathModelFile) || string.IsNullOrEmpty(pathDatasetFile))
-            MessageBox.Show("Add a data set and a model file to start", "Warning!");
+        if (string.IsNullOrEmpty(pathModelFile))
+            MessageBox.Show("Add a model file to start", "Warning!");
         else
         {
             double result = 0;
@@ -57,6 +69,8 @@ public partial class MainForm : Form
                 for (int i = 2; i < 8; i++)
                     model[i - 2] = double.Parse(lines[i]);
                 pathModelFile = path;
+                modelname = lines[1];
+                lblModelPath.Text = pathModelFile;
                 return true;
 
             case 66 when lines[0] is @"mltool veri seti":
@@ -64,6 +78,7 @@ public partial class MainForm : Form
                 for (int j = 2; j < 66; j++)
                     dataset[j - 2] = int.Parse(lines[j]);
                 pathDatasetFile = path;
+                lblDatasetFile.Text = pathDatasetFile;
                 return true;
 
             default:
@@ -78,6 +93,36 @@ public partial class MainForm : Form
         string pyt = $"{run}pyscripts\\";
         if (!Directory.Exists(pyt))
             MessageBox.Show("mltoolgui could not locate \'pyscripts\' folder in running directory. Have you used build script to compile this application?", "Fatal Error!");
+    }
+
+    private void textBox1_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode is Keys.Enter)
+        {
+            if (textBox1.Text is "exit")
+                Lock(true);
+            else if (double.TryParse(textBox1.Text, out double number))
+                rtbEvaluate.AppendText($"{modelname}({number}) = {Calculate(number)}");
+            else
+                rtbEvaluate.AppendText("Please enter a number :(");
+            e.SuppressKeyPress = true;
+            e.Handled = true;
+        }
+    }
+
+    private void Lock(bool state)
+    {
+        btnTrain.Enabled = state;
+        btnEvaluate.Enabled = state;
+        menuStrip.Enabled = state;
+        rtbEvaluate.Enabled = !state;
+        textBox1.Enabled = !state;
+
+        rtbEvaluate.Text = state ? "beep boop? beep boop." : "";
+        textBox1.Text = state ? "beep boop?" : "";
+
+        if (state is false)
+            textBox1.Focus();
     }
 
     private void tsmiNewDataset_Click(object sender, EventArgs e)
@@ -127,6 +172,10 @@ public partial class MainForm : Form
         if (ofd.ShowDialog() is DialogResult.OK)
             ValidateFile(ofd.FileName);
     }
+
     private void tsmiTrain_Click(object sender, EventArgs e) => btnTrain_Click(sender, e); // dirty but it works
+
+    private void tsmiEvaluate_Click(object sender, EventArgs e) => btnEvaluate_Click(sender, e);
+
     private void tsmiExit_Click(object sender, EventArgs e) => Close();
 }
