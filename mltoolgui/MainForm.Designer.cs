@@ -197,16 +197,18 @@ partial class MainForm
             this.lblDatasetFile.AutoSize = true;
             this.lblDatasetFile.Location = new System.Drawing.Point(134, 36);
             this.lblDatasetFile.Name = "lblDatasetFile";
-            this.lblDatasetFile.Size = new System.Drawing.Size(0, 15);
+            this.lblDatasetFile.Size = new System.Drawing.Size(96, 15);
             this.lblDatasetFile.TabIndex = 10;
+            this.lblDatasetFile.Text = "<none selected>";
             // 
             // lblModelPath
             // 
             this.lblModelPath.AutoSize = true;
             this.lblModelPath.Location = new System.Drawing.Point(134, 11);
             this.lblModelPath.Name = "lblModelPath";
-            this.lblModelPath.Size = new System.Drawing.Size(0, 15);
+            this.lblModelPath.Size = new System.Drawing.Size(96, 15);
             this.lblModelPath.TabIndex = 9;
+            this.lblModelPath.Text = "<none selected>";
             // 
             // __lblDataset
             // 
@@ -235,6 +237,7 @@ partial class MainForm
             this.textBox1.Location = new System.Drawing.Point(0, 285);
             this.textBox1.Name = "textBox1";
             this.textBox1.PlaceholderText = "enter a number";
+            this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(602, 23);
             this.textBox1.TabIndex = 1;
             this.textBox1.Text = "beep boop?";
