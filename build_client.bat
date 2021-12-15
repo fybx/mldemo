@@ -19,7 +19,7 @@ del /s /q "%~dp0\mltoolcli\bin\Release\net6.0\*.*"
 echo:
 echo 3. Build mltoolcli for Release
 echo:
-dotnet build --nologo --verbosity minimal --configuration Release
+dotnet build mltoolcli --nologo --verbosity minimal --configuration Release
 
 echo:
 echo 4. Copy mltoolcli to artifacts
