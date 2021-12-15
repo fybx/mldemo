@@ -15,6 +15,7 @@ namespace mltoolcli
         private static int[] _datasetContent;
         private static string _modelName;
         private static double[] _modelContent;
+        private static OSPlatform Platform;
         
         private static void Main(string[] args)
         {
@@ -90,31 +91,13 @@ namespace mltoolcli
             if (!File.Exists($"{AppContext.BaseDirectory}pyscripts/{scriptName}.py") && !File.Exists($"{AppContext.BaseDirectory}pyscripts\\{scriptName}.py"))
                 throw new FileNotFoundException(TurkishStrings.ExcpMsg_ScriptNotFound, $"{AppContext.BaseDirectory}{scriptName}");
 
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-            {
-                ProcessStartInfo info = new()
-                {
-                    FileName = "python3",
-                    Arguments = $"{AppContext.BaseDirectory}pyscripts/{scriptName}.py {additionalArgs}"
-                };
-                Process prc = new() { StartInfo = info };
-                prc.Start();   
-            }
-            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            {
-                ProcessStartInfo info = new()
-                {
-                    FileName = "python3",
-                    Arguments = $"{AppContext.BaseDirectory}pyscripts\\{scriptName}.py {additionalArgs}"
-                };
-                Process prc = new() { StartInfo = info };
-                prc.Start();
-            }
+            if (Platform == OSPlatform.Windows)
+                Process.Start(new ProcessStartInfo { FileName = "python", Arguments = $"{AppContext.BaseDirectory}pyscripts\\{scriptName}.py {additionalArgs}" });
+            else if (Platform == OSPlatform.Linux)
+                Process.Start(new ProcessStartInfo { FileName = "python3", Arguments = $"{AppContext.BaseDirectory}pyscripts/{scriptName}.py {additionalArgs}" });
             else
-            {
-                Console.WriteLine(@"mltool: Ewww");
-            }
-            
+                Console.WriteLine("Ewww");
+
             Thread.Sleep(1000);
         }
 
