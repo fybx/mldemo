@@ -36,6 +36,7 @@ partial class MainForm
             this.tsmiDropboxLoad = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiLoadDataset = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiLoadModel = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiLoadBundle = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDropboxActions = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTrain = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiEvaluate = new System.Windows.Forms.ToolStripMenuItem();
@@ -95,7 +96,8 @@ partial class MainForm
             // 
             this.tsmiDropboxLoad.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiLoadDataset,
-            this.tsmiLoadModel});
+            this.tsmiLoadModel,
+            this.tsmiLoadBundle});
             this.tsmiDropboxLoad.Name = "tsmiDropboxLoad";
             this.tsmiDropboxLoad.Size = new System.Drawing.Size(45, 20);
             this.tsmiDropboxLoad.Text = "Load";
@@ -113,6 +115,13 @@ partial class MainForm
             this.tsmiLoadModel.Size = new System.Drawing.Size(116, 22);
             this.tsmiLoadModel.Text = "Model";
             this.tsmiLoadModel.Click += new System.EventHandler(this.tsmiLoadModel_Click);
+            // 
+            // tsmiLoadBundle
+            // 
+            this.tsmiLoadBundle.Name = "tsmiLoadBundle";
+            this.tsmiLoadBundle.Size = new System.Drawing.Size(180, 22);
+            this.tsmiLoadBundle.Text = "Bundle";
+            this.tsmiLoadBundle.Click += new System.EventHandler(this.tsmiLoadBundle_Click);
             // 
             // tsmiDropboxActions
             // 
@@ -311,4 +320,5 @@ partial class MainForm
     private Label __lblModel;
     private RichTextBox rtbEvaluate;
     private TextBox textBox1;
+    private ToolStripMenuItem tsmiLoadBundle;
 }

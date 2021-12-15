@@ -175,6 +175,31 @@ public partial class MainForm : Form
             ValidateFile(ofd.FileName);
     }
 
+    private void tsmiLoadBundle_Click(object sender, EventArgs e)
+    {
+        OpenFileDialog ofd = new()
+        {
+            Filter = "Model file|*.model|Data set file|*.dataset",
+            Title = "Load a model - data set bundle"
+        };
+
+        if (ofd.ShowDialog() is DialogResult.OK)
+        {
+            if (ofd.FileName.EndsWith(".model") && File.Exists(ofd.FileName.Replace(".model", ".dataset")))
+            {
+                ValidateFile(ofd.FileName);
+                ValidateFile(ofd.FileName.Replace(".model", ".dataset"));
+            }
+            else if (ofd.FileName.EndsWith(".dataset") && File.Exists(ofd.FileName.Replace(".dataset", ".model")))
+            {
+                ValidateFile(ofd.FileName);
+                ValidateFile(ofd.FileName.Replace(".dataset", ".model"));
+            }
+            else
+                MessageBox.Show("Bundled files must exist under same folder!", "Warning!");
+        }
+    }
+
     private void tsmiTrain_Click(object sender, EventArgs e) => btnTrain_Click(sender, e); // dirty but it works
 
     private void tsmiEvaluate_Click(object sender, EventArgs e) => btnEvaluate_Click(sender, e);
