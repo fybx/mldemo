@@ -50,6 +50,7 @@ partial class MainForm
             this.@__lblModel = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.rtbEvaluate = new System.Windows.Forms.RichTextBox();
+            this.tsmiNewBundle = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -73,7 +74,8 @@ partial class MainForm
             // 
             this.tsmiDropboxNew.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiNewDataset,
-            this.tsmiNewModel});
+            this.tsmiNewModel,
+            this.tsmiNewBundle});
             this.tsmiDropboxNew.Name = "tsmiDropboxNew";
             this.tsmiDropboxNew.Size = new System.Drawing.Size(43, 20);
             this.tsmiDropboxNew.Text = "New";
@@ -81,14 +83,14 @@ partial class MainForm
             // tsmiNewDataset
             // 
             this.tsmiNewDataset.Name = "tsmiNewDataset";
-            this.tsmiNewDataset.Size = new System.Drawing.Size(116, 22);
+            this.tsmiNewDataset.Size = new System.Drawing.Size(180, 22);
             this.tsmiNewDataset.Text = "Data set";
             this.tsmiNewDataset.Click += new System.EventHandler(this.tsmiNewDataset_Click);
             // 
             // tsmiNewModel
             // 
             this.tsmiNewModel.Name = "tsmiNewModel";
-            this.tsmiNewModel.Size = new System.Drawing.Size(116, 22);
+            this.tsmiNewModel.Size = new System.Drawing.Size(180, 22);
             this.tsmiNewModel.Text = "Model";
             this.tsmiNewModel.Click += new System.EventHandler(this.tsmiNewModel_Click);
             // 
@@ -105,14 +107,14 @@ partial class MainForm
             // tsmiLoadDataset
             // 
             this.tsmiLoadDataset.Name = "tsmiLoadDataset";
-            this.tsmiLoadDataset.Size = new System.Drawing.Size(116, 22);
+            this.tsmiLoadDataset.Size = new System.Drawing.Size(180, 22);
             this.tsmiLoadDataset.Text = "Data set";
             this.tsmiLoadDataset.Click += new System.EventHandler(this.tsmiLoadDataset_Click);
             // 
             // tsmiLoadModel
             // 
             this.tsmiLoadModel.Name = "tsmiLoadModel";
-            this.tsmiLoadModel.Size = new System.Drawing.Size(116, 22);
+            this.tsmiLoadModel.Size = new System.Drawing.Size(180, 22);
             this.tsmiLoadModel.Text = "Model";
             this.tsmiLoadModel.Click += new System.EventHandler(this.tsmiLoadModel_Click);
             // 
@@ -135,14 +137,14 @@ partial class MainForm
             // tsmiTrain
             // 
             this.tsmiTrain.Name = "tsmiTrain";
-            this.tsmiTrain.Size = new System.Drawing.Size(118, 22);
+            this.tsmiTrain.Size = new System.Drawing.Size(180, 22);
             this.tsmiTrain.Text = "Train";
             this.tsmiTrain.Click += new System.EventHandler(this.tsmiTrain_Click);
             // 
             // tsmiEvaluate
             // 
             this.tsmiEvaluate.Name = "tsmiEvaluate";
-            this.tsmiEvaluate.Size = new System.Drawing.Size(118, 22);
+            this.tsmiEvaluate.Size = new System.Drawing.Size(180, 22);
             this.tsmiEvaluate.Text = "Evaluate";
             this.tsmiEvaluate.Click += new System.EventHandler(this.tsmiEvaluate_Click);
             // 
@@ -206,16 +208,18 @@ partial class MainForm
             this.lblDatasetFile.AutoSize = true;
             this.lblDatasetFile.Location = new System.Drawing.Point(134, 36);
             this.lblDatasetFile.Name = "lblDatasetFile";
-            this.lblDatasetFile.Size = new System.Drawing.Size(0, 15);
+            this.lblDatasetFile.Size = new System.Drawing.Size(87, 15);
             this.lblDatasetFile.TabIndex = 10;
+            this.lblDatasetFile.Text = "<not selected>";
             // 
             // lblModelPath
             // 
             this.lblModelPath.AutoSize = true;
             this.lblModelPath.Location = new System.Drawing.Point(134, 11);
             this.lblModelPath.Name = "lblModelPath";
-            this.lblModelPath.Size = new System.Drawing.Size(0, 15);
+            this.lblModelPath.Size = new System.Drawing.Size(87, 15);
             this.lblModelPath.TabIndex = 9;
+            this.lblModelPath.Text = "<not selected>";
             // 
             // __lblDataset
             // 
@@ -263,6 +267,13 @@ partial class MainForm
             this.rtbEvaluate.Size = new System.Drawing.Size(602, 307);
             this.rtbEvaluate.TabIndex = 0;
             this.rtbEvaluate.Text = "beep boop? boop beep.";
+            // 
+            // tsmiNewBundle
+            // 
+            this.tsmiNewBundle.Name = "tsmiNewBundle";
+            this.tsmiNewBundle.Size = new System.Drawing.Size(180, 22);
+            this.tsmiNewBundle.Text = "Bundle";
+            this.tsmiNewBundle.Click += new System.EventHandler(this.tsmiNewBundle_Click);
             // 
             // MainForm
             // 
@@ -318,4 +329,5 @@ partial class MainForm
     private RichTextBox rtbEvaluate;
     private TextBox textBox1;
     private ToolStripMenuItem tsmiLoadBundle;
+    private ToolStripMenuItem tsmiNewBundle;
 }

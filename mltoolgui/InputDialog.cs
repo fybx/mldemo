@@ -7,7 +7,7 @@
         public InputDialog(string fileType)
         {
             InitializeComponent();
-            Text = $"Name your {fileType} file";
+            Text = fileType is "bundle" ? $"Name your model and data set files" : $"Name your {fileType} file";
         }
 
         private void btnOK_Click(object sender, EventArgs e)

@@ -20,6 +20,7 @@ public partial class MainForm : Form
     private void btnEvaluate_Click(object sender, EventArgs e) => Evaluate();
     private void tsmiNewModel_Click(object sender, EventArgs e) => NewFile("model");
     private void tsmiNewDataset_Click(object sender, EventArgs e) => NewFile("dataset");
+    private void tsmiNewBundle_Click(object sender, EventArgs e) => NewFile("bundle");
     private void tsmiLoadModel_Click(object sender, EventArgs e) => LoadFile("model");
     private void tsmiLoadDataset_Click(object sender, EventArgs e) => LoadFile("dataset");
     private void tsmiLoadBundle_Click(object sender, EventArgs e) => LoadFile("bundle");
@@ -94,12 +95,12 @@ public partial class MainForm : Form
         }
     }
 
-    private void NewFile(string what)
+    private static void NewFile(string what)
     {
         using InputDialog dialog = new(what);
         DialogResult result = dialog.ShowDialog();
         if (result is DialogResult.OK && string.IsNullOrWhiteSpace(dialog.FileName) is false)
-            RunMltoolcli("new", what is "model" ? $"model {dialog.FileName}" : $"dataset {dialog.FileName}");
+            RunMltoolcli("new", what is "bundle" ? $"bundle {dialog.FileName}" : what is "model" ? $"model {dialog.FileName}" : $"dataset {dialog.FileName}");
     }
 
     private void LoadFile(string what)
