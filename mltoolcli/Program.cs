@@ -15,8 +15,7 @@ namespace mltoolcli
         private static int[] _datasetContent;
         private static string _modelName;
         private static double[] _modelContent;
-        private static OSPlatform Platform;
-        
+
         private static void Main(string[] args)
         {
             if (args.Length is 0)
@@ -83,7 +82,7 @@ namespace mltoolcli
         /// <summary>
         /// Calls python script from "pyscripts" folder in base directory of running program
         /// </summary>
-        /// <param name="scriptName">Name of needed script</param>
+        /// <param name="scriptName">Name of needed script, do not append *.py extension</param>
         /// <param name="additionalArgs">Any additional arguments, these will be concatenated to script path</param>
         /// <exception cref="FileNotFoundException">May throw this exception if script file is not found</exception>
         private static void CallScript(string scriptName, string additionalArgs)
@@ -91,9 +90,9 @@ namespace mltoolcli
             if (!File.Exists($"{AppContext.BaseDirectory}pyscripts/{scriptName}.py") && !File.Exists($"{AppContext.BaseDirectory}pyscripts\\{scriptName}.py"))
                 throw new FileNotFoundException(TurkishStrings.ExcpMsg_ScriptNotFound, $"{AppContext.BaseDirectory}{scriptName}");
 
-            if (Platform == OSPlatform.Windows)
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 Process.Start(new ProcessStartInfo { FileName = "python", Arguments = $"{AppContext.BaseDirectory}pyscripts\\{scriptName}.py {additionalArgs}" });
-            else if (Platform == OSPlatform.Linux)
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                 Process.Start(new ProcessStartInfo { FileName = "python3", Arguments = $"{AppContext.BaseDirectory}pyscripts/{scriptName}.py {additionalArgs}" });
             else
                 Console.WriteLine("Ewww");
@@ -101,6 +100,8 @@ namespace mltoolcli
             Thread.Sleep(1000);
         }
 
+        
+        
         private static void Calculate(double number)
         {
             if (_modelContent is null || _modelName is null)
