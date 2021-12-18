@@ -4,9 +4,12 @@ from scipy.optimize import curve_fit
 from numpy import arange
 
 
-def polyfunc(x, a, b, c, d, e, f):
-    # y = ax^5 + bx^4 + cx^3 + dx^2 + ex + f
-    return (a * (x ** 5)) + (b * (x ** 4)) + (c * (x ** 3)) + (d * x * x) + (e * x) + f
+def polynomial5th(x, a, b, c, d, e, f):
+    return a * (x ** 5) + b * (x ** 4) + c * (x ** 3) + d * (x ** 2) + (e * x) + f
+
+
+def polynomial4th(x, a, b, c, d, e):
+    return a * (x ** 4) + b * (x ** 3) + c * (x ** 2) + d * x + e
 
 
 def read_dataset(location):
@@ -44,32 +47,36 @@ def save_model(location, name, a, b, c, d, e, f):
 def main():
     print("mltool (pyscripts): model eğitiliyor!")
     try:
-        datasetloc = sys.argv[1]  # kullanılacak veri seti dosyasının tam konumu
+        dataset_path = sys.argv[1]  # kullanılacak veri seti dosyasının tam konumu
     except IndexError:
-        print("mltool (pyscripts): [HATA] trainmodel.py datasetloc argümanı bekliyor")
+        print("mltool (pyscripts): [HATA] trainmodel.py dataset_path argümanı bekliyor")
         sys.exit()
 
     try:
-        modelloc = sys.argv[2]  # kullanılacak model dosyasının tam konumu
+        model_path = sys.argv[2]  # kullanılacak model dosyasının tam konumu
     except IndexError:
-        print("mltool (pyscripts): [HATA] trainmodel.py modelloc argümanı bekliyor")
+        print("mltool (pyscripts): [HATA] trainmodel.py model_path argümanı bekliyor")
         sys.exit()
 
-    datasetname, x, y = read_dataset(datasetloc)
-    modelname, a, b, c, d, e, f = read_model(modelloc)
+    dataset_name, x, y = read_dataset(dataset_path)
+    model_name, a, b, c, d, e, f = read_model(model_path)
+    
     plot.xlabel("x ekseni")
     plot.ylabel("y ekseni")
-    plot.title(modelname)
-    popt, _ = curve_fit(polyfunc, x, y)
+    plot.title(model_name)
+    
+    popt, _ = curve_fit(polynomial5th, x, y)
     a, b, c, d, e, f = popt
+    
     plot.scatter(x, y)
     x_line = arange(min(x), max(x), 1)
-    y_line = polyfunc(x_line, a, b, c, d, e, f)
-    save_model(modelloc, modelname, a, b, c, d, e, f)
-    plot.plot(x_line, y_line, '--', color='red')
-    figloc = modelname + " on " + datasetname + ".png"
-    plot.savefig(figloc)
-    print("mltool (pyscripts): [BİLGİ] model eğitildi. grafik '%s' konumuna kaydedildi" % figloc)
+    y_line = polynomial5th(x_line, a, b, c, d, e, f)
+    save_model(model_path, model_name, a, b, c, d, e, f)
+    plot.plot(x_line, y_line, color='red')
+    
+    figure_path = model_name + " on " + dataset_name + ".png"
+    plot.savefig(figure_path)
+    print(f"mltool (pyscripts): [BİLGİ] model eğitildi. grafik '{figure_path}' konumuna kaydedildi")
 
 
 main()
