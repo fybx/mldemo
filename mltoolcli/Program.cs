@@ -16,48 +16,37 @@ namespace mltoolcli
         private static string _modelName;
         private static double[] _modelContent;
 
-        private static void Main(string[] args)
+        private static int Main(string[] args)
         {
             if (args.Length is 0)
             {
                 PrintHelp("help");
-                return;
+                return 0;
             }
 
             switch (args[0])
             {
                 case "help":
                         PrintHelp("help");
-                    break;
+                        return 0;
                 
                 case "new":
-                    if (args.Length is 3)
+                    if (args.Length is 3 && args[1] is "model" or "dataset")
                     {
-                        switch (args[1])
-                        {
-                            case @"model":
-                                string modelPath =  $"{AppContext.BaseDirectory}{(args[2].EndsWith(".model") ? args[2] : $"{args[2]}.model")}";
-                                File.Create(modelPath).Close();
-                                CallScript(@"newmodel", modelPath);
-                                break;
-                            
-                            case @"dataset":
-                                string datasetPath = $"{AppContext.BaseDirectory}{(args[2].EndsWith(".dataset") ? args[2] : $"{args[2]}.dataset")}";
-                                File.Create(datasetPath).Close();
-                                CallScript(@"newdataset", datasetPath);
-                                break;
-                            
-                            default:
-                                PrintHelp("new");
-                                break;
-                        }
+                        string path = (args[1] is @"model"
+                            ? args[2].EndsWith(".model") ? args[2] : $"{args[2]}.model"
+                            : args[2].EndsWith(".dataset") ? args[2] : $"{args[2]}.dataset").Insert(0, AppContext.BaseDirectory);
+                        string script = args[1] is @"model" ? @"newmodel" : @"newdataset";
+                        File.Create(path).Close();
+                        int statusCode = CallScript(script, path);
+                        return statusCode is 0 ? CheckFile(path) : statusCode;
                     }
                     else
                         PrintHelp("new");
                     break;
 
                 case "eval":
-                    if (args.Length is 3 && ValidateFile(args[1]) && double.TryParse(args[2], out double numberInput))
+                    if (args.Length is 3 && ValidateFile(args[1]) is 0 && double.TryParse(args[2], out double numberInput))
                         Calculate(numberInput);
                     else
                         PrintHelp("eval");
@@ -65,18 +54,17 @@ namespace mltoolcli
                 
                 case "train":
                     // ReSharper disable once ConvertIfStatementToSwitchStatement
-                    if (args.Length is 3 && ValidateFile(args[1]) && ValidateFile(args[2]))
-                        CallScript("trainmodel", $"{args[1]} {args[2]}");
-                    else if (args.Length is 3)
-                        Console.WriteLine(TurkishStrings.ErrMsg_Train0);
+                    if (args.Length is 3 && ValidateFile(args[1]) is 0 && ValidateFile(args[2]) is 0)
+                        return CallScript("trainmodel", $"{args[1]} {args[2]}");
                     else
                         PrintHelp("train");
                     break;
 
                 default:
-                    Console.WriteLine(TurkishStrings.ErrMsg_DefaultStatement, args[0]);
-                    break;
+                    return ErrorMessage("ErrMsg_DefaultStatement");
             }
+
+            return 0;
         }
 
         /// <summary>
@@ -84,8 +72,7 @@ namespace mltoolcli
         /// </summary>
         /// <param name="scriptName">Name of needed script, do not append *.py extension</param>
         /// <param name="additionalArgs">Any additional arguments, these will be concatenated to script path</param>
-        /// <exception cref="FileNotFoundException">May throw this exception if script file is not found</exception>
-        private static void CallScript(string scriptName, string additionalArgs)
+        private static int CallScript(string scriptName, string additionalArgs)
         {
             string path = Path.Combine(AppContext.BaseDirectory, "pyscripts", $"{scriptName}.py");
             string arguments = $"{path} {additionalArgs}";
@@ -102,12 +89,15 @@ namespace mltoolcli
                 ErrorMessage("ErrMsg_UnsupportedPlatform");
 
             Thread.Sleep(1000);
+            return 0;
         }
+
+        private static int CheckFile(string path) => File.ReadAllLines(path)[0] is "mltool modeli" or "mltool veri seti" ? 0 : ErrorMessage("ErrMsg_FileNotValid");
 
         private static int ErrorMessage(string errorName, string additionalMessage = "")
         {
             // ReSharper disable once LocalizableElement
-            Console.WriteLine("{0}\n{1}", TurkishStrings.ResourceManager.GetString(errorName), additionalMessage);
+            Console.WriteLine(TurkishStrings.ResourceManager.GetString(errorName), additionalMessage);
             return errorName switch
             {
                 "ErrMsg_Calculate0" => -1001,
@@ -135,7 +125,7 @@ namespace mltoolcli
             }
         }
 
-        private static bool ValidateFile(string path)
+        private static int ValidateFile(string path)
         {
             List<string> lines = File.ReadAllLines(path).ToList();
             switch (lines.Count)
@@ -145,17 +135,17 @@ namespace mltoolcli
                     _modelName = lines[1];
                     for (int i = 2; i < 8; i++)
                         _modelContent[i - 2] = double.Parse(lines[i]);
-                    return true;
+                    return 0;
                 
                 case 66 when lines[0] is @"mltool veri seti":
                     _datasetContent = new int[64];
                     for (int j = 2; j < 66; j++)
                         _datasetContent[j - 2] = int.Parse(lines[j]);
-                    return true;
+                    return 0;
                 
                 default:
                     Console.WriteLine(TurkishStrings.ErrMsg_ValidateFile0, path);
-                    return false;
+                    return 1;
             }
         }
         
