@@ -57,7 +57,7 @@ Derleme scriptlerinin çıktı hedefi bu klasördür. Derleme sonucu elde edilen
 
 ## mltoolcli komutları
 
-mltoolcli'e dahil olan komutların ne işe yaradığı ve nasıl kullanıldığı hakkında bilgi almak için 'mltoolcli [komut] help' komutunu çalıştırabilirsiniz. 
+mltoolcli'e dahil olan komutların ne işe yaradığı ve nasıl kullanıldığı hakkında bilgi almak için ```mltoolcli [komut] help``` komutunu çalıştırabilirsiniz. 
 
 > $ mltool help
 
