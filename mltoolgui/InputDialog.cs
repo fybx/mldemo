@@ -1,4 +1,5 @@
-﻿namespace mltoolgui
+﻿#pragma warning disable IDE1006 // Naming Styles
+namespace mltoolgui
 {
     public partial class InputDialog : Form
     {
@@ -12,7 +13,7 @@
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtName.Text) || string.IsNullOrWhiteSpace(txtName.Text))
+            if (string.IsNullOrWhiteSpace(txtName.Text) || string.IsNullOrWhiteSpace(txtName.Text))
                 DialogResult = DialogResult.Cancel;
             else
             {
@@ -23,3 +24,4 @@
         }
     }
 }
+#pragma warning restore IDE1006 // Naming Styles
