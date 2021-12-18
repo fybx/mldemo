@@ -1,4 +1,5 @@
 // ReSharper disable once IdentifierTypo
+#pragma warning disable IDE1006 // Naming Styles
 using System.Diagnostics;
 
 namespace mltoolgui;
@@ -71,15 +72,20 @@ public partial class MainForm : Form
             FileName = "mltoolcli.exe",
             Arguments = $"{command} {arguments}"
         };
-        Process prc = Process.Start(info);
-        prc.WaitForExit();
-        if (prc.ExitCode is not 0 or -1000)
-            Message.Show($"An error has occured.\n mltoolcli.exe returned status code: {prc.ExitCode}.", "Important Warning!");
+        using Process? proc = Process.Start(info);
+        if (proc is null)
+            Message.Show("An unknown error has occured while launching mltoolcli!", "Error");
+        else
+        {
+            proc.WaitForExit();
+            if (proc.ExitCode is not 0 or -1000)
+                Message.Show($"An error has occured.\n mltoolcli.exe returned status code: {proc.ExitCode}.", "Important Warning!");
+        }
     }
 
     private void Train()
     {
-        if (string.IsNullOrEmpty(pathModelFile) || string.IsNullOrEmpty(pathDatasetFile))
+        if (string.IsNullOrWhiteSpace(pathModelFile) || string.IsNullOrWhiteSpace(pathDatasetFile))
             Message.Show("Add a data set and a model file to start", "Warning!");
         else
             RunMltoolcli("train", $"{pathDatasetFile} {pathModelFile}");
@@ -87,7 +93,7 @@ public partial class MainForm : Form
 
     private void Evaluate()
     {
-        if (string.IsNullOrEmpty(pathModelFile))
+        if (string.IsNullOrWhiteSpace(pathModelFile))
             Message.Show("Add a model file to start", "Warning!");
         else
         {
@@ -99,8 +105,7 @@ public partial class MainForm : Form
     private static void NewFile(string what)
     {
         using InputDialog dialog = new(what);
-        DialogResult result = dialog.ShowDialog();
-        if (result is DialogResult.OK && string.IsNullOrWhiteSpace(dialog.FileName) is false)
+        if (dialog.ShowDialog() is DialogResult.OK && string.IsNullOrWhiteSpace(dialog.FileName) is false)
             RunMltoolcli("new", what is "bundle" ? $"bundle {dialog.FileName}" : what is "model" ? $"model {dialog.FileName}" : $"dataset {dialog.FileName}");
     }
 
@@ -150,7 +155,7 @@ public partial class MainForm : Form
 
     private double Calculate(double number)
     {
-        if (string.IsNullOrEmpty(pathModelFile))
+        if (string.IsNullOrWhiteSpace(pathModelFile) || model is null)
             Message.Show("Add a model file to start", "Warning!");
         else
         {
@@ -215,3 +220,4 @@ public partial class MainForm : Form
             textBox1.Focus();
     }
 }
+#pragma warning restore IDE1006 // Naming Styles
