@@ -17,13 +17,13 @@
             ButtonCancel.Visible = cancellable;
         }
 
-        public static DialogResult Show(string title, string message)
+        public static DialogResult Show(string message, string title)
         {
             using Message m = new(title, message);
             return m.ShowDialog();
         }
 
-        public static DialogResult Show(string title, string message, bool cancellable = true)
+        public static DialogResult Show(string message, string title, bool cancellable = true)
         {
             using Message m = new(title, message, cancellable);
             return m.ShowDialog();
