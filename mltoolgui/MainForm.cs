@@ -52,7 +52,7 @@ public partial class MainForm : Form
         }
     }
 
-    private void Load(string what)
+    private void LoadFile(string what)
     {
         switch (what)
         {
@@ -170,9 +170,9 @@ public partial class MainForm : Form
             RunMltoolcli("new", $"model {dialog.FileName}");
     }
 
-    private void tsmiLoadDataset_Click(object sender, EventArgs e) => Load("dataset");
+    private void tsmiLoadDataset_Click(object sender, EventArgs e) => LoadFile("dataset");
 
-    private void tsmiLoadModel_Click(object sender, EventArgs e) => Load("model");
+    private void tsmiLoadModel_Click(object sender, EventArgs e) => LoadFile("model");
 
     private void tsmiLoadBundle_Click(object sender, EventArgs e)
     {
