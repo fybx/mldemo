@@ -33,6 +33,7 @@ partial class MainForm
             this.tsmiDropboxNew = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiNewDataset = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiNewModel = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiNewBundle = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDropboxLoad = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiLoadDataset = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiLoadModel = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,7 +51,6 @@ partial class MainForm
             this.@__lblModel = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.rtbEvaluate = new System.Windows.Forms.RichTextBox();
-            this.tsmiNewBundle = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -60,6 +60,7 @@ partial class MainForm
             // 
             // menuStrip
             // 
+            this.menuStrip.BackColor = System.Drawing.Color.Black;
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiDropboxNew,
             this.tsmiDropboxLoad,
@@ -72,16 +73,20 @@ partial class MainForm
             // 
             // tsmiDropboxNew
             // 
+            this.tsmiDropboxNew.BackColor = System.Drawing.Color.Black;
             this.tsmiDropboxNew.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiNewDataset,
             this.tsmiNewModel,
             this.tsmiNewBundle});
+            this.tsmiDropboxNew.ForeColor = System.Drawing.Color.White;
             this.tsmiDropboxNew.Name = "tsmiDropboxNew";
             this.tsmiDropboxNew.Size = new System.Drawing.Size(43, 20);
             this.tsmiDropboxNew.Text = "New";
             // 
             // tsmiNewDataset
             // 
+            this.tsmiNewDataset.BackColor = System.Drawing.Color.Black;
+            this.tsmiNewDataset.ForeColor = System.Drawing.Color.White;
             this.tsmiNewDataset.Name = "tsmiNewDataset";
             this.tsmiNewDataset.Size = new System.Drawing.Size(180, 22);
             this.tsmiNewDataset.Text = "Data set";
@@ -89,10 +94,21 @@ partial class MainForm
             // 
             // tsmiNewModel
             // 
+            this.tsmiNewModel.BackColor = System.Drawing.Color.Black;
+            this.tsmiNewModel.ForeColor = System.Drawing.Color.White;
             this.tsmiNewModel.Name = "tsmiNewModel";
             this.tsmiNewModel.Size = new System.Drawing.Size(180, 22);
             this.tsmiNewModel.Text = "Model";
             this.tsmiNewModel.Click += new System.EventHandler(this.tsmiNewModel_Click);
+            // 
+            // tsmiNewBundle
+            // 
+            this.tsmiNewBundle.BackColor = System.Drawing.Color.Black;
+            this.tsmiNewBundle.ForeColor = System.Drawing.Color.White;
+            this.tsmiNewBundle.Name = "tsmiNewBundle";
+            this.tsmiNewBundle.Size = new System.Drawing.Size(180, 22);
+            this.tsmiNewBundle.Text = "Bundle";
+            this.tsmiNewBundle.Click += new System.EventHandler(this.tsmiNewBundle_Click);
             // 
             // tsmiDropboxLoad
             // 
@@ -100,12 +116,15 @@ partial class MainForm
             this.tsmiLoadDataset,
             this.tsmiLoadModel,
             this.tsmiLoadBundle});
+            this.tsmiDropboxLoad.ForeColor = System.Drawing.Color.White;
             this.tsmiDropboxLoad.Name = "tsmiDropboxLoad";
             this.tsmiDropboxLoad.Size = new System.Drawing.Size(45, 20);
             this.tsmiDropboxLoad.Text = "Load";
             // 
             // tsmiLoadDataset
             // 
+            this.tsmiLoadDataset.BackColor = System.Drawing.Color.Black;
+            this.tsmiLoadDataset.ForeColor = System.Drawing.Color.White;
             this.tsmiLoadDataset.Name = "tsmiLoadDataset";
             this.tsmiLoadDataset.Size = new System.Drawing.Size(180, 22);
             this.tsmiLoadDataset.Text = "Data set";
@@ -113,6 +132,8 @@ partial class MainForm
             // 
             // tsmiLoadModel
             // 
+            this.tsmiLoadModel.BackColor = System.Drawing.Color.Black;
+            this.tsmiLoadModel.ForeColor = System.Drawing.Color.White;
             this.tsmiLoadModel.Name = "tsmiLoadModel";
             this.tsmiLoadModel.Size = new System.Drawing.Size(180, 22);
             this.tsmiLoadModel.Text = "Model";
@@ -120,6 +141,8 @@ partial class MainForm
             // 
             // tsmiLoadBundle
             // 
+            this.tsmiLoadBundle.BackColor = System.Drawing.Color.Black;
+            this.tsmiLoadBundle.ForeColor = System.Drawing.Color.White;
             this.tsmiLoadBundle.Name = "tsmiLoadBundle";
             this.tsmiLoadBundle.Size = new System.Drawing.Size(180, 22);
             this.tsmiLoadBundle.Text = "Bundle";
@@ -127,15 +150,19 @@ partial class MainForm
             // 
             // tsmiDropboxActions
             // 
+            this.tsmiDropboxActions.BackColor = System.Drawing.Color.Black;
             this.tsmiDropboxActions.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiTrain,
             this.tsmiEvaluate});
+            this.tsmiDropboxActions.ForeColor = System.Drawing.Color.White;
             this.tsmiDropboxActions.Name = "tsmiDropboxActions";
             this.tsmiDropboxActions.Size = new System.Drawing.Size(59, 20);
             this.tsmiDropboxActions.Text = "Actions";
             // 
             // tsmiTrain
             // 
+            this.tsmiTrain.BackColor = System.Drawing.Color.Black;
+            this.tsmiTrain.ForeColor = System.Drawing.Color.White;
             this.tsmiTrain.Name = "tsmiTrain";
             this.tsmiTrain.Size = new System.Drawing.Size(180, 22);
             this.tsmiTrain.Text = "Train";
@@ -143,6 +170,8 @@ partial class MainForm
             // 
             // tsmiEvaluate
             // 
+            this.tsmiEvaluate.BackColor = System.Drawing.Color.Black;
+            this.tsmiEvaluate.ForeColor = System.Drawing.Color.White;
             this.tsmiEvaluate.Name = "tsmiEvaluate";
             this.tsmiEvaluate.Size = new System.Drawing.Size(180, 22);
             this.tsmiEvaluate.Text = "Evaluate";
@@ -150,6 +179,7 @@ partial class MainForm
             // 
             // tsmiExit
             // 
+            this.tsmiExit.ForeColor = System.Drawing.Color.White;
             this.tsmiExit.Name = "tsmiExit";
             this.tsmiExit.Size = new System.Drawing.Size(38, 20);
             this.tsmiExit.Text = "Exit";
@@ -267,13 +297,6 @@ partial class MainForm
             this.rtbEvaluate.Size = new System.Drawing.Size(602, 307);
             this.rtbEvaluate.TabIndex = 0;
             this.rtbEvaluate.Text = "beep boop? boop beep.";
-            // 
-            // tsmiNewBundle
-            // 
-            this.tsmiNewBundle.Name = "tsmiNewBundle";
-            this.tsmiNewBundle.Size = new System.Drawing.Size(180, 22);
-            this.tsmiNewBundle.Text = "Bundle";
-            this.tsmiNewBundle.Click += new System.EventHandler(this.tsmiNewBundle_Click);
             // 
             // MainForm
             // 
