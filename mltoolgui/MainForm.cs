@@ -32,11 +32,12 @@ public partial class MainForm : Form
         if (e.KeyCode is Keys.Enter)
         {
             if (textBox1.Text is "exit")
-                Lock(true);
+                Lock(false);
             else if (double.TryParse(textBox1.Text, out double number))
-                rtbEvaluate.AppendText($"{modelname}({number}) = {Calculate(number)}");
+                rtbEvaluate.AppendText($"{modelname}({number}) = {Calculate(number)}\n");
             else
                 rtbEvaluate.AppendText("Please enter a number :(");
+            textBox1.Clear();
             e.SuppressKeyPress = true;
             e.Handled = true;
         }
@@ -90,8 +91,8 @@ public partial class MainForm : Form
             Message.Show("Add a model file to start", "Warning!");
         else
         {
-            Message.Show("Use the text box below to crunch numbers. Enter 'exit' to exit evaluation shell.", "Information");
-            Lock(false);
+            Message.Show("Use the text box below to enter numbers. Type 'exit' to exit evaluation shell.", "Information");
+            Lock(true);
         }
     }
 
@@ -196,16 +197,21 @@ public partial class MainForm : Form
 
     private void Lock(bool state)
     {
-        btnTrain.Enabled = state;
-        btnEvaluate.Enabled = state;
-        menuStrip.Enabled = state;
-        rtbEvaluate.Enabled = !state;
-        textBox1.Enabled = !state;
+        // when locked, disable train, evaluate, load, create functionality
+        // only let the use of number input textbox
+        //
+        // when unlocked, disable input textbox, enable other functionality
+        //
+        // output textbox will always be read only 
+        btnTrain.Enabled = !state;
+        btnEvaluate.Enabled = !state;
+        tsmiDropboxLoad.Enabled = !state;
+        tsmiDropboxNew.Enabled = !state;
+        tsmiDropboxActions.Enabled = !state;
+        textBox1.Enabled = state;
+        rtbEvaluate.ReadOnly = true;
 
-        rtbEvaluate.Text = state ? "beep boop? beep boop." : "";
-        textBox1.Text = state ? "beep boop?" : "";
-
-        if (state is false)
+        if (state)
             textBox1.Focus();
     }
 }

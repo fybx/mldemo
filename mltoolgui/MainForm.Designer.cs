@@ -88,7 +88,7 @@ partial class MainForm
             this.tsmiNewDataset.BackColor = System.Drawing.Color.Black;
             this.tsmiNewDataset.ForeColor = System.Drawing.Color.White;
             this.tsmiNewDataset.Name = "tsmiNewDataset";
-            this.tsmiNewDataset.Size = new System.Drawing.Size(180, 22);
+            this.tsmiNewDataset.Size = new System.Drawing.Size(116, 22);
             this.tsmiNewDataset.Text = "Data set";
             this.tsmiNewDataset.Click += new System.EventHandler(this.tsmiNewDataset_Click);
             // 
@@ -97,7 +97,7 @@ partial class MainForm
             this.tsmiNewModel.BackColor = System.Drawing.Color.Black;
             this.tsmiNewModel.ForeColor = System.Drawing.Color.White;
             this.tsmiNewModel.Name = "tsmiNewModel";
-            this.tsmiNewModel.Size = new System.Drawing.Size(180, 22);
+            this.tsmiNewModel.Size = new System.Drawing.Size(116, 22);
             this.tsmiNewModel.Text = "Model";
             this.tsmiNewModel.Click += new System.EventHandler(this.tsmiNewModel_Click);
             // 
@@ -106,7 +106,7 @@ partial class MainForm
             this.tsmiNewBundle.BackColor = System.Drawing.Color.Black;
             this.tsmiNewBundle.ForeColor = System.Drawing.Color.White;
             this.tsmiNewBundle.Name = "tsmiNewBundle";
-            this.tsmiNewBundle.Size = new System.Drawing.Size(180, 22);
+            this.tsmiNewBundle.Size = new System.Drawing.Size(116, 22);
             this.tsmiNewBundle.Text = "Bundle";
             this.tsmiNewBundle.Click += new System.EventHandler(this.tsmiNewBundle_Click);
             // 
@@ -126,7 +126,7 @@ partial class MainForm
             this.tsmiLoadDataset.BackColor = System.Drawing.Color.Black;
             this.tsmiLoadDataset.ForeColor = System.Drawing.Color.White;
             this.tsmiLoadDataset.Name = "tsmiLoadDataset";
-            this.tsmiLoadDataset.Size = new System.Drawing.Size(180, 22);
+            this.tsmiLoadDataset.Size = new System.Drawing.Size(116, 22);
             this.tsmiLoadDataset.Text = "Data set";
             this.tsmiLoadDataset.Click += new System.EventHandler(this.tsmiLoadDataset_Click);
             // 
@@ -135,7 +135,7 @@ partial class MainForm
             this.tsmiLoadModel.BackColor = System.Drawing.Color.Black;
             this.tsmiLoadModel.ForeColor = System.Drawing.Color.White;
             this.tsmiLoadModel.Name = "tsmiLoadModel";
-            this.tsmiLoadModel.Size = new System.Drawing.Size(180, 22);
+            this.tsmiLoadModel.Size = new System.Drawing.Size(116, 22);
             this.tsmiLoadModel.Text = "Model";
             this.tsmiLoadModel.Click += new System.EventHandler(this.tsmiLoadModel_Click);
             // 
@@ -144,7 +144,7 @@ partial class MainForm
             this.tsmiLoadBundle.BackColor = System.Drawing.Color.Black;
             this.tsmiLoadBundle.ForeColor = System.Drawing.Color.White;
             this.tsmiLoadBundle.Name = "tsmiLoadBundle";
-            this.tsmiLoadBundle.Size = new System.Drawing.Size(180, 22);
+            this.tsmiLoadBundle.Size = new System.Drawing.Size(116, 22);
             this.tsmiLoadBundle.Text = "Bundle";
             this.tsmiLoadBundle.Click += new System.EventHandler(this.tsmiLoadBundle_Click);
             // 
@@ -164,7 +164,7 @@ partial class MainForm
             this.tsmiTrain.BackColor = System.Drawing.Color.Black;
             this.tsmiTrain.ForeColor = System.Drawing.Color.White;
             this.tsmiTrain.Name = "tsmiTrain";
-            this.tsmiTrain.Size = new System.Drawing.Size(180, 22);
+            this.tsmiTrain.Size = new System.Drawing.Size(118, 22);
             this.tsmiTrain.Text = "Train";
             this.tsmiTrain.Click += new System.EventHandler(this.tsmiTrain_Click);
             // 
@@ -173,7 +173,7 @@ partial class MainForm
             this.tsmiEvaluate.BackColor = System.Drawing.Color.Black;
             this.tsmiEvaluate.ForeColor = System.Drawing.Color.White;
             this.tsmiEvaluate.Name = "tsmiEvaluate";
-            this.tsmiEvaluate.Size = new System.Drawing.Size(180, 22);
+            this.tsmiEvaluate.Size = new System.Drawing.Size(118, 22);
             this.tsmiEvaluate.Text = "Evaluate";
             this.tsmiEvaluate.Click += new System.EventHandler(this.tsmiEvaluate_Click);
             // 
@@ -188,8 +188,10 @@ partial class MainForm
             // splitContainer
             // 
             this.splitContainer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.splitContainer.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.splitContainer.Cursor = System.Windows.Forms.Cursors.HSplit;
             this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer.IsSplitterFixed = true;
             this.splitContainer.Location = new System.Drawing.Point(0, 24);
             this.splitContainer.Name = "splitContainer";
             this.splitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -280,7 +282,6 @@ partial class MainForm
             this.textBox1.PlaceholderText = "enter a number";
             this.textBox1.Size = new System.Drawing.Size(602, 23);
             this.textBox1.TabIndex = 1;
-            this.textBox1.Text = "beep boop?";
             this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
             // 
             // rtbEvaluate
@@ -296,7 +297,7 @@ partial class MainForm
             this.rtbEvaluate.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
             this.rtbEvaluate.Size = new System.Drawing.Size(602, 307);
             this.rtbEvaluate.TabIndex = 0;
-            this.rtbEvaluate.Text = "beep boop? boop beep.";
+            this.rtbEvaluate.Text = "";
             // 
             // MainForm
             // 
