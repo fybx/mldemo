@@ -14,11 +14,53 @@ public partial class MainForm : Form
 
     public MainForm() => InitializeComponent();
 
+    #region Events
     private void MainForm_Load(object sender, EventArgs e) => Where();
-
     private void btnTrain_Click(object sender, EventArgs e) => Train();
-
     private void btnEvaluate_Click(object sender, EventArgs e) => Evaluate();
+    private void tsmiNewModel_Click(object sender, EventArgs e) => NewFile("model");
+    private void tsmiNewDataset_Click(object sender, EventArgs e) => NewFile("dataset");
+    private void tsmiLoadModel_Click(object sender, EventArgs e) => LoadFile("model");
+    private void tsmiLoadDataset_Click(object sender, EventArgs e) => LoadFile("dataset");
+    private void tsmiLoadBundle_Click(object sender, EventArgs e) => LoadFile("bundle");
+    private void tsmiTrain_Click(object sender, EventArgs e) => Train();
+    private void tsmiEvaluate_Click(object sender, EventArgs e) => Evaluate();
+    private void tsmiExit_Click(object sender, EventArgs e) => Close();
+    private void textBox1_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode is Keys.Enter)
+        {
+            if (textBox1.Text is "exit")
+                Lock(true);
+            else if (double.TryParse(textBox1.Text, out double number))
+                rtbEvaluate.AppendText($"{modelname}({number}) = {Calculate(number)}");
+            else
+                rtbEvaluate.AppendText("Please enter a number :(");
+            e.SuppressKeyPress = true;
+            e.Handled = true;
+        }
+    }
+    #endregion
+
+    /// <summary>
+    /// Explores base directory of executable application to find pyscripts folder and mltoolcli executable file. If said folder and executable do not exist, shows an error message and terminates application.
+    /// </summary>
+    private void Where()
+    {
+        string run = AppContext.BaseDirectory;
+        string pyt = $"{run}pyscripts\\";
+        string cli = $"{run}mltoolcli.exe";
+        if (Directory.Exists(pyt) is false)
+        {
+            MessageBox.Show("mltoolgui couldn't locate folder 'pyscripts' in base directory.\nPlease use script 'build_gui.bat' to build mltoolgui.", "Fatal Error!");
+            Close();
+        }
+        if (File.Exists(cli) is false)
+        {
+            MessageBox.Show("mltoolgui couldn't locate 'mltoolcli.exe' in base directory.\nPlease use script 'build_gui.bat' to build mltoolgui.", "Fatal Error!");
+            Close();
+        }
+    }
 
     private static void RunMltoolcli(string command, string arguments)
     {
@@ -52,17 +94,50 @@ public partial class MainForm : Form
         }
     }
 
+    private void NewFile(string what)
+    {
+        using InputDialog dialog = new(what);
+        DialogResult result = dialog.ShowDialog();
+        if (result is DialogResult.OK && string.IsNullOrWhiteSpace(dialog.FileName) is false)
+            RunMltoolcli("new", what is "model" ? $"model {dialog.FileName}" : $"dataset {dialog.FileName}");
+    }
+
     private void LoadFile(string what)
     {
+        OpenFileDialog ofd;
         switch (what)
         {
             case "model" or "dataset":
-                OpenFileDialog ofd = what is "model" 
-                    ? new() { Filter = "Model file|*.model", Title = "Load a model file" } 
+                ofd = what is "model"
+                    ? new() { Filter = "Model file|*.model", Title = "Load a model file" }
                     : new() { Filter = "Data set file|*.dataset", Title = "Load a data set file" };
 
                 if (ofd.ShowDialog() is DialogResult.OK)
                     ValidateFile(ofd.FileName);
+                break;
+
+            case "bundle":
+                ofd = new()
+                {
+                    Filter = "Model file|*.model|Data set file|*.dataset",
+                    Title = "Load a model - data set bundle"
+                };
+
+                if (ofd.ShowDialog() is DialogResult.OK)
+                {
+                    if (ofd.FileName.EndsWith(".model") && File.Exists(ofd.FileName.Replace(".model", ".dataset")))
+                    {
+                        ValidateFile(ofd.FileName);
+                        ValidateFile(ofd.FileName.Replace(".model", ".dataset"));
+                    }
+                    else if (ofd.FileName.EndsWith(".dataset") && File.Exists(ofd.FileName.Replace(".dataset", ".model")))
+                    {
+                        ValidateFile(ofd.FileName);
+                        ValidateFile(ofd.FileName.Replace(".dataset", ".model"));
+                    }
+                    else
+                        MessageBox.Show("Bundled files must exist under same folder!", "Warning!");
+                }
                 break;
 
             default:
@@ -85,6 +160,11 @@ public partial class MainForm : Form
         return double.NaN;
     }
 
+    /// <summary>
+    /// Validates if given file is a recognized model or data set file. Mltoolcli is not used here because of repeated calls to start a Process would be costly.
+    /// </summary>
+    /// <param name="path">Path of file to be validated</param>
+    /// <returns>Returns true if file is a valid model or data set file</returns>
     private bool ValidateFile(string path)
     {
         List<string> lines = File.ReadAllLines(path).ToList();
@@ -113,32 +193,6 @@ public partial class MainForm : Form
         }
     }
 
-    private static void Where()
-    {
-        string run = AppContext.BaseDirectory;
-        string pyt = $"{run}pyscripts\\";
-        string cli = $"{run}mltoolcli.exe";
-        if (!Directory.Exists(pyt))
-            MessageBox.Show("mltoolgui could not locate \'pyscripts\' folder in running directory. Have you used build script to compile this application?", "Fatal Error!");
-        if (File.Exists(cli) is false)
-            MessageBox.Show("mltoolgui could not locate \'mltoolcli.exe\' in running directory. Have you used build script to compile this application?", "Fatal Error!");
-    }
-
-    private void textBox1_KeyDown(object sender, KeyEventArgs e)
-    {
-        if (e.KeyCode is Keys.Enter)
-        {
-            if (textBox1.Text is "exit")
-                Lock(true);
-            else if (double.TryParse(textBox1.Text, out double number))
-                rtbEvaluate.AppendText($"{modelname}({number}) = {Calculate(number)}");
-            else
-                rtbEvaluate.AppendText("Please enter a number :(");
-            e.SuppressKeyPress = true;
-            e.Handled = true;
-        }
-    }
-
     private void Lock(bool state)
     {
         btnTrain.Enabled = state;
@@ -153,55 +207,4 @@ public partial class MainForm : Form
         if (state is false)
             textBox1.Focus();
     }
-
-    private void tsmiNewDataset_Click(object sender, EventArgs e)
-    {
-        using InputDialog dialog = new("dataset");
-        DialogResult result = dialog.ShowDialog();
-        if (result is DialogResult.OK && string.IsNullOrWhiteSpace(dialog.FileName))
-            RunMltoolcli("new", $"dataset {dialog.FileName}");
-    }
-
-    private void tsmiNewModel_Click(object sender, EventArgs e)
-    {
-        using InputDialog dialog = new("model");
-        DialogResult result = dialog.ShowDialog();
-        if (result is DialogResult.OK && string.IsNullOrWhiteSpace(dialog.FileName))
-            RunMltoolcli("new", $"model {dialog.FileName}");
-    }
-
-    private void tsmiLoadDataset_Click(object sender, EventArgs e) => LoadFile("dataset");
-
-    private void tsmiLoadModel_Click(object sender, EventArgs e) => LoadFile("model");
-
-    private void tsmiLoadBundle_Click(object sender, EventArgs e)
-    {
-        OpenFileDialog ofd = new()
-        {
-            Filter = "Model file|*.model|Data set file|*.dataset",
-            Title = "Load a model - data set bundle"
-        };
-
-        if (ofd.ShowDialog() is DialogResult.OK)
-        {
-            if (ofd.FileName.EndsWith(".model") && File.Exists(ofd.FileName.Replace(".model", ".dataset")))
-            {
-                ValidateFile(ofd.FileName);
-                ValidateFile(ofd.FileName.Replace(".model", ".dataset"));
-            }
-            else if (ofd.FileName.EndsWith(".dataset") && File.Exists(ofd.FileName.Replace(".dataset", ".model")))
-            {
-                ValidateFile(ofd.FileName);
-                ValidateFile(ofd.FileName.Replace(".dataset", ".model"));
-            }
-            else
-                MessageBox.Show("Bundled files must exist under same folder!", "Warning!");
-        }
-    }
-
-    private void tsmiTrain_Click(object sender, EventArgs e) => Train();
-
-    private void tsmiEvaluate_Click(object sender, EventArgs e) => btnEvaluate_Click(sender, e);
-
-    private void tsmiExit_Click(object sender, EventArgs e) => Close();
 }
