@@ -1,3 +1,9 @@
+## mldemo
+.NET ve Python kullanan cross-platform makine öğrenmesi modeli
+
+1. [Derleme ve Test Etme](#derleme-ve-test-etme)
+2. [Repository yapısı](#mldemo-repository-yapısı)
+
 ## Derleme ve Test Etme
 
 mltoolcli projesini GNU/Linux için build_client.sh, Windows için build_client.bat scriptini kullanarak derleyebilirsiniz. 
@@ -18,7 +24,12 @@ Sembolik linki oluşturmak için yükseltilmiş bir komut istemi başlatın. Ard
 
 > mklink "C:\python\kurulu\klasör\python3.exe" "C:\python\kurulu\klasör\python.exe"
 
-#### Scriptlerin gereksinimleri: numpy scipy matplotlib
+#### Gereksinimlerin kurulumu
+> $ pip install [numpy](https://numpy.org/ "NumPy")
+
+> $ pip install [scipy](https://scipy.org/ "SciPy") 
+
+> $ pip install [matplotlib](https://matplotlib.org/ "Matplotlib")
 
 ## mldemo repository yapısı
 
