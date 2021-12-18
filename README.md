@@ -12,7 +12,7 @@ Cross-platform .NET ve Python pratiği amaçlı makine öğrenmesi konulu progra
 
 ## Derleme ve Test Etme
 
-mltoolcli projesini GNU/Linux için ```build_client.sh```, Windows için ```build_client.bat``` scriptini kullanarak derleyebilirsiniz. 
+mltoolcli projesini GNU/Linux için ```build_cli.sh```, Windows için ```build_cli.bat``` scriptini kullanarak derleyebilirsiniz. 
 
 mltoolgui projesi yalnızca Windows'ta çalışır, bu nedenle derlemek için yalnızca ```build_gui.bat``` scriptini kullanmalısınız.
 
