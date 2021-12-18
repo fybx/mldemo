@@ -26,31 +26,40 @@ namespace mltoolcli
                     return PrintHelp("help");
 
                 case "new":
-                    if (args.Length is 3 && args[1] is "model" or "dataset")
+                    if (args.Length is 3 && args[1] is "model" or "dataset" or "bundle")
                     {
-                        string path = (args[1] is @"model"
-                            ? args[2].EndsWith(".model") ? args[2] : $"{args[2]}.model"
-                            : args[2].EndsWith(".dataset") ? args[2] : $"{args[2]}.dataset").Insert(0, AppContext.BaseDirectory);
-                        string script = args[1] is @"model" ? @"newmodel" : @"newdataset";
-                        File.Create(path).Close();
-                        int statusCode = CallScript(script, path);
-                        return statusCode is 0 ? CheckFile(path) : statusCode;
+                        string modelPath = (args[2].EndsWith(".model") ? args[2] : $"{args[2]}.model").Insert(0, AppContext.BaseDirectory);
+                        string datasetPath = (args[2].EndsWith(".dataset") ? args[2] : $"{args[2]}.dataset").Insert(0, AppContext.BaseDirectory);
+
+                        if (args[1] is "bundle")
+                        {
+                            File.Create(datasetPath).Close();
+                            File.Create(modelPath).Close();
+                            int statusCode0 = CallScript("newdataset", datasetPath);
+                            int statusCode1 = CallScript("newmodel", modelPath);
+                            return statusCode0 is 0 && statusCode1 is 0 ? 0 : ErrorMessage("ErrMsg_BundleCreationFailed");
+                        }
+                        else
+                        {
+                            string script = args[1] is @"model" ? @"newmodel" : @"newdataset";
+                            string path = args[1] is "model" ? modelPath : datasetPath;    
+                            File.Create(path).Close();
+                            int statusCode = CallScript(script, path);
+                            return statusCode is 0 ? CheckFile(path) : statusCode;
+                        }
                     }
                     else
                         return PrintHelp("new");
 
                 case "eval":
-                    if (args.Length is 3 && ValidateFile(args[1]) is 0 && double.TryParse(args[2], out double numberInput))
-                        return Calculate(numberInput);
-                    else
-                        return PrintHelp("eval");
+                    return args.Length is 3 && ValidateFile(args[1]) is 0 && double.TryParse(args[2], out double numberInput)
+                        ? Calculate(numberInput)
+                        : PrintHelp("eval");
 
                 case "train":
-                    // ReSharper disable once ConvertIfStatementToSwitchStatement
-                    if (args.Length is 3 && ValidateFile(args[1]) is 0 && ValidateFile(args[2]) is 0)
-                        return CallScript("trainmodel", $"{args[1]} {args[2]}");
-                    else
-                        return PrintHelp("train");
+                    return args.Length is 3 && ValidateFile(args[1]) is 0 && ValidateFile(args[2]) is 0
+                        ? CallScript("trainmodel", $"{args[1]} {args[2]}")
+                        : PrintHelp("train");
 
                 default:
                     return ErrorMessage("ErrMsg_DefaultStatement");
@@ -71,13 +80,11 @@ namespace mltoolcli
                 return ErrorMessage(TurkishStrings.ExcpMsg_ScriptNotFound, path);
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                Process.Start(new ProcessStartInfo { FileName = "python", Arguments = arguments });
+                Process.Start(new ProcessStartInfo { FileName = "python", Arguments = arguments }).WaitForExit();
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-                Process.Start(new ProcessStartInfo { FileName = "python3", Arguments = arguments });
+                Process.Start(new ProcessStartInfo { FileName = "python3", Arguments = arguments }).WaitForExit();
             else
                 return ErrorMessage("ErrMsg_UnsupportedPlatform");
-
-            Thread.Sleep(1000);
             return 0;
         }
 
@@ -88,13 +95,14 @@ namespace mltoolcli
             Console.WriteLine(TurkishStrings.ResourceManager.GetString(errorName), additionalMessage);
             return errorName switch
             {
-                "ErrMsg_Calculate0" => -1001,
+                "ErrMsg_ModelNotLoaded" => -1001,
                 "ErrMsg_DefaultStatement" => -1002,
                 "ErrMsg_Load0"  => -1003,
                 "ErrMsg_Train0" => -1004,
                 "ErrMsg_ValidateFile0" => -1005,
                 "ExcpMsg_ScriptNotFound" => -1006,
                 "ErrMsg_UnsupportedPlatform" => -1007,
+                "ErrMsg_BundleCreationFailed" => -1008,
                 _ => -9000
             };
         }
@@ -102,7 +110,7 @@ namespace mltoolcli
         private static int Calculate(double number)
         {
             if (_modelContent is null || _modelName is null)
-                return ErrorMessage("ErrMsg_Calculate0");
+                return ErrorMessage("ErrMsg_ModelNotLoaded");
 
             double result = 0;
             for (int i = 0; i < 6; i++)
@@ -155,6 +163,7 @@ namespace mltoolcli
                     Console.WriteLine(TurkishStrings.Syntax_New0);
                     Console.WriteLine(TurkishStrings.Syntax_New1);
                     Console.WriteLine(TurkishStrings.Syntax_New2);
+                    Console.WriteLine(TurkishStrings.Syntax_New3);
                     break;
                 
                 case "eval":
