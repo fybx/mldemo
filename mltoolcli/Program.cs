@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
-// ReSharper disable HeapView.ObjectAllocation.Evident
 
 // ReSharper disable once IdentifierTypo
 namespace mltoolcli
@@ -19,17 +18,13 @@ namespace mltoolcli
         private static int Main(string[] args)
         {
             if (args.Length is 0)
-            {
-                PrintHelp("help");
-                return 0;
-            }
+                return PrintHelp("help");
 
             switch (args[0])
             {
                 case "help":
-                        PrintHelp("help");
-                        return 0;
-                
+                    return PrintHelp("help");
+
                 case "new":
                     if (args.Length is 3 && args[1] is "model" or "dataset")
                     {
@@ -42,29 +37,24 @@ namespace mltoolcli
                         return statusCode is 0 ? CheckFile(path) : statusCode;
                     }
                     else
-                        PrintHelp("new");
-                    break;
+                        return PrintHelp("new");
 
                 case "eval":
                     if (args.Length is 3 && ValidateFile(args[1]) is 0 && double.TryParse(args[2], out double numberInput))
-                        Calculate(numberInput);
+                        return Calculate(numberInput);
                     else
-                        PrintHelp("eval");
-                    break;
-                
+                        return PrintHelp("eval");
+
                 case "train":
                     // ReSharper disable once ConvertIfStatementToSwitchStatement
                     if (args.Length is 3 && ValidateFile(args[1]) is 0 && ValidateFile(args[2]) is 0)
                         return CallScript("trainmodel", $"{args[1]} {args[2]}");
                     else
-                        PrintHelp("train");
-                    break;
+                        return PrintHelp("train");
 
                 default:
                     return ErrorMessage("ErrMsg_DefaultStatement");
             }
-
-            return 0;
         }
 
         /// <summary>
@@ -78,15 +68,14 @@ namespace mltoolcli
             string arguments = $"{path} {additionalArgs}";
             
             if (File.Exists(path) is false)
-                ErrorMessage(TurkishStrings.ExcpMsg_ScriptNotFound, path);
-
+                return ErrorMessage(TurkishStrings.ExcpMsg_ScriptNotFound, path);
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 Process.Start(new ProcessStartInfo { FileName = "python", Arguments = arguments });
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                 Process.Start(new ProcessStartInfo { FileName = "python3", Arguments = arguments });
             else
-                ErrorMessage("ErrMsg_UnsupportedPlatform");
+                return ErrorMessage("ErrMsg_UnsupportedPlatform");
 
             Thread.Sleep(1000);
             return 0;
@@ -96,7 +85,6 @@ namespace mltoolcli
 
         private static int ErrorMessage(string errorName, string additionalMessage = "")
         {
-            // ReSharper disable once LocalizableElement
             Console.WriteLine(TurkishStrings.ResourceManager.GetString(errorName), additionalMessage);
             return errorName switch
             {
@@ -107,22 +95,20 @@ namespace mltoolcli
                 "ErrMsg_ValidateFile0" => -1005,
                 "ExcpMsg_ScriptNotFound" => -1006,
                 "ErrMsg_UnsupportedPlatform" => -1007,
-                _ => 0
+                _ => -9000
             };
         }
         
-        private static void Calculate(double number)
+        private static int Calculate(double number)
         {
             if (_modelContent is null || _modelName is null)
-                Console.WriteLine(TurkishStrings.ErrMsg_Calculate0);
-            else
-            {
-                double result = 0;
-                for (int i = 0; i < 6; i++)
-                    result += _modelContent[i] * Math.Pow(number, 5 - i);
-                // ReSharper disable once HeapView.BoxingAllocation
-                Console.WriteLine($@"{_modelName}({number}) = {result}");
-            }
+                return ErrorMessage("ErrMsg_Calculate0");
+
+            double result = 0;
+            for (int i = 0; i < 6; i++)
+                result += _modelContent[i] * Math.Pow(number, 5 - i);
+            Console.WriteLine($@"{_modelName}({number}) = {result}");
+            return 0;
         }
 
         private static int ValidateFile(string path)
@@ -149,7 +135,7 @@ namespace mltoolcli
             }
         }
         
-        private static void PrintHelp(string command)
+        private static int PrintHelp(string command)
         {
             switch (command)
             {
@@ -183,6 +169,7 @@ namespace mltoolcli
                     Console.WriteLine(TurkishStrings.Syntax_Train1);
                     break;
             }
+            return -1000;
         }
     }
 }
