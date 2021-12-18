@@ -25,20 +25,22 @@ public partial class MainForm : Form
     private void tsmiLoadModel_Click(object sender, EventArgs e) => LoadFile("model");
     private void tsmiLoadDataset_Click(object sender, EventArgs e) => LoadFile("dataset");
     private void tsmiLoadBundle_Click(object sender, EventArgs e) => LoadFile("bundle");
+    private void lblModelPath_DoubleClick(object sender, EventArgs e) => LoadFile("model");
+    private void lblDatasetFile_DoubleClick(object sender, EventArgs e) => LoadFile("dataset");
     private void tsmiTrain_Click(object sender, EventArgs e) => Train();
     private void tsmiEvaluate_Click(object sender, EventArgs e) => Evaluate();
     private void tsmiExit_Click(object sender, EventArgs e) => Close();
-    private void textBox1_KeyDown(object sender, KeyEventArgs e)
+    private void txtInput_KeyDown(object sender, KeyEventArgs e)
     {
         if (e.KeyCode is Keys.Enter)
         {
-            if (textBox1.Text is "exit")
+            if (txtInput.Text is "exit")
                 Lock(false);
-            else if (double.TryParse(textBox1.Text, out double number))
+            else if (double.TryParse(txtInput.Text, out double number))
                 rtbEvaluate.AppendText($"{modelname}({number}) = {Calculate(number)}\n");
             else
                 rtbEvaluate.AppendText("Please enter a number :(");
-            textBox1.Clear();
+            txtInput.Clear();
             e.SuppressKeyPress = true;
             e.Handled = true;
         }
@@ -213,11 +215,11 @@ public partial class MainForm : Form
         tsmiDropboxLoad.Enabled = !state;
         tsmiDropboxNew.Enabled = !state;
         tsmiDropboxActions.Enabled = !state;
-        textBox1.Enabled = state;
+        txtInput.Enabled = state;
         rtbEvaluate.ReadOnly = true;
 
         if (state)
-            textBox1.Focus();
+            txtInput.Focus();
     }
 }
 #pragma warning restore IDE1006 // Naming Styles

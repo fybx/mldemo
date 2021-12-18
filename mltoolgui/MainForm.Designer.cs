@@ -49,7 +49,7 @@ partial class MainForm
             this.lblModelPath = new System.Windows.Forms.Label();
             this.@__lblDataset = new System.Windows.Forms.Label();
             this.@__lblModel = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtInput = new System.Windows.Forms.TextBox();
             this.rtbEvaluate = new System.Windows.Forms.RichTextBox();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
@@ -188,7 +188,7 @@ partial class MainForm
             // splitContainer
             // 
             this.splitContainer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.splitContainer.Cursor = System.Windows.Forms.Cursors.HSplit;
+            this.splitContainer.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainer.IsSplitterFixed = true;
@@ -207,7 +207,7 @@ partial class MainForm
             // 
             // splitContainer.Panel2
             // 
-            this.splitContainer.Panel2.Controls.Add(this.textBox1);
+            this.splitContainer.Panel2.Controls.Add(this.txtInput);
             this.splitContainer.Panel2.Controls.Add(this.rtbEvaluate);
             this.splitContainer.Size = new System.Drawing.Size(604, 427);
             this.splitContainer.SplitterDistance = 113;
@@ -243,6 +243,7 @@ partial class MainForm
             this.lblDatasetFile.Size = new System.Drawing.Size(87, 15);
             this.lblDatasetFile.TabIndex = 10;
             this.lblDatasetFile.Text = "<not selected>";
+            this.lblDatasetFile.DoubleClick += new System.EventHandler(this.lblDatasetFile_DoubleClick);
             // 
             // lblModelPath
             // 
@@ -252,6 +253,7 @@ partial class MainForm
             this.lblModelPath.Size = new System.Drawing.Size(87, 15);
             this.lblModelPath.TabIndex = 9;
             this.lblModelPath.Text = "<not selected>";
+            this.lblModelPath.DoubleClick += new System.EventHandler(this.lblModelPath_DoubleClick);
             // 
             // __lblDataset
             // 
@@ -271,18 +273,18 @@ partial class MainForm
             this.@__lblModel.TabIndex = 7;
             this.@__lblModel.Text = "Current model file:";
             // 
-            // textBox1
+            // txtInput
             // 
-            this.textBox1.BackColor = System.Drawing.Color.Black;
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.textBox1.ForeColor = System.Drawing.Color.Turquoise;
-            this.textBox1.Location = new System.Drawing.Point(0, 285);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.PlaceholderText = "enter a number";
-            this.textBox1.Size = new System.Drawing.Size(602, 23);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
+            this.txtInput.BackColor = System.Drawing.Color.Black;
+            this.txtInput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtInput.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.txtInput.ForeColor = System.Drawing.Color.Turquoise;
+            this.txtInput.Location = new System.Drawing.Point(0, 285);
+            this.txtInput.Name = "txtInput";
+            this.txtInput.PlaceholderText = "enter a number";
+            this.txtInput.Size = new System.Drawing.Size(602, 23);
+            this.txtInput.TabIndex = 1;
+            this.txtInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtInput_KeyDown);
             // 
             // rtbEvaluate
             // 
@@ -351,7 +353,7 @@ partial class MainForm
     private Label __lblDataset;
     private Label __lblModel;
     private RichTextBox rtbEvaluate;
-    private TextBox textBox1;
+    private TextBox txtInput;
     private ToolStripMenuItem tsmiLoadBundle;
     private ToolStripMenuItem tsmiNewBundle;
 }
