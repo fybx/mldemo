@@ -176,5 +176,11 @@ namespace mltoolcli {
                 return ResourceManager.GetString("ErrMsg_UnsupportedPlatform", resourceCulture);
             }
         }
+        
+        internal static string ErrMsg_FileNotValid {
+            get {
+                return ResourceManager.GetString("ErrMsg_FileNotValid", resourceCulture);
+            }
+        }
     }
 }

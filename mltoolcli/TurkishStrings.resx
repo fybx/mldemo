@@ -84,4 +84,7 @@
     <data name="ErrMsg_UnsupportedPlatform" xml:space="preserve">
         <value>mltool: [HATA] platformunuz desteklenmiyor. Lütfen Windows veya Linux ile çalıştırın.</value>
     </data>
+    <data name="ErrMsg_FileNotValid" xml:space="preserve">
+        <value>mltool: [HATA] dosya geçerli bir model veya veri seti dosyası değil.</value>
+    </data>
 </root>
