@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Resources;
 using System.Runtime.InteropServices;
 using System.Threading;
 // ReSharper disable HeapView.ObjectAllocation.Evident
@@ -100,7 +102,21 @@ namespace mltoolcli
             Thread.Sleep(1000);
         }
 
-        
+        private static int ErrorMessage(string errorName, string additionalMessage)
+        {
+            // ReSharper disable once LocalizableElement
+            Console.WriteLine("{0}\n{1}", TurkishStrings.ResourceManager.GetString(errorName), additionalMessage);
+            return errorName switch
+            {
+                "ErrMsg_Calculate0" => -1001,
+                "ErrMsg_DefaultStatement" => -1002,
+                "ErrMsg_Load0"  => -1003,
+                "ErrMsg_Train0" => -1004,
+                "ErrMsg_ValidateFile0" => -1005,
+                "ExcpMsg_ScriptNotFound" => -1006,
+                _ => 0
+            };
+        }
         
         private static void Calculate(double number)
         {
