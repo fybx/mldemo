@@ -81,4 +81,7 @@
     <data name="ErrMsg_ValidateFile0" xml:space="preserve">
         <value>mltool: [HATA] '{0}' dosyasının türü tanınamadı. Model veya veri seti dosyası seçmelisiniz!</value>
     </data>
+    <data name="ErrMsg_UnsupportedPlatform" xml:space="preserve">
+        <value>mltool: [HATA] platformunuz desteklenmiyor. Lütfen Windows veya Linux ile çalıştırın.</value>
+    </data>
 </root>

@@ -51,6 +51,18 @@ namespace mltoolcli {
             }
         }
         
+        internal static string HelpMsg_Usage {
+            get {
+                return ResourceManager.GetString("HelpMsg_Usage", resourceCulture);
+            }
+        }
+        
+        internal static string HelpMsg_ListName {
+            get {
+                return ResourceManager.GetString("HelpMsg_ListName", resourceCulture);
+            }
+        }
+        
         internal static string HelpMsg_Help {
             get {
                 return ResourceManager.GetString("HelpMsg_Help", resourceCulture);
@@ -62,12 +74,13 @@ namespace mltoolcli {
                 return ResourceManager.GetString("HelpMsg_Train", resourceCulture);
             }
         }
-
-        internal static string HelpMsg_Eval
-        {
-            get { return ResourceManager.GetString("HelpMsg_Eval", resourceCulture); }
+        
+        internal static string HelpMsg_Eval {
+            get {
+                return ResourceManager.GetString("HelpMsg_Eval", resourceCulture);
+            }
         }
-
+        
         internal static string HelpMsg_New {
             get {
                 return ResourceManager.GetString("HelpMsg_New", resourceCulture);
@@ -80,21 +93,9 @@ namespace mltoolcli {
             }
         }
         
-        internal static string HelpMsg_Usage {
-            get {
-                return ResourceManager.GetString("HelpMsg_Usage", resourceCulture);
-            }
-        }
-        
         internal static string HelpMsg_Info {
             get {
                 return ResourceManager.GetString("HelpMsg_Info", resourceCulture);
-            }
-        }
-
-        internal static string HelpMsg_ListName {
-            get {
-                return ResourceManager.GetString("HelpMsg_ListName", resourceCulture);
             }
         }
         
@@ -145,7 +146,13 @@ namespace mltoolcli {
                 return ResourceManager.GetString("ErrMsg_Train0", resourceCulture);
             }
         }
-
+        
+        internal static string ErrMsg_Load0 {
+            get {
+                return ResourceManager.GetString("ErrMsg_Load0", resourceCulture);
+            }
+        }
+        
         internal static string ErrMsg_DefaultStatement {
             get {
                 return ResourceManager.GetString("ErrMsg_DefaultStatement", resourceCulture);
@@ -161,6 +168,12 @@ namespace mltoolcli {
         internal static string ErrMsg_ValidateFile0 {
             get {
                 return ResourceManager.GetString("ErrMsg_ValidateFile0", resourceCulture);
+            }
+        }
+        
+        internal static string ErrMsg_UnsupportedPlatform {
+            get {
+                return ResourceManager.GetString("ErrMsg_UnsupportedPlatform", resourceCulture);
             }
         }
     }
