@@ -13,7 +13,7 @@ def main():
     with open(fileloc, 'w') as f:
         f.write("mltool modeli\n")
         f.write(os.path.basename(fileloc).split('.')[0] + '\n')
-        for _ in range(6):
+        for i in range(6):
             f.write("1\n")
 
     print("mltool (pyscripts): [BİLGİ] model yaratıldı.")

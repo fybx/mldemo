@@ -2,7 +2,6 @@ import random
 import sys
 import os
 
-
 def main():
     print("mltool (pyscripts): [BİLGİ] yeni veri seti yaratılıyor!")
     try:

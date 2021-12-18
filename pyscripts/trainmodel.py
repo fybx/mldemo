@@ -4,26 +4,26 @@ from scipy.optimize import curve_fit
 from numpy import arange
 
 
-def polynomial_function(x, a, b, c, d, e, f):
+def polyfunc(x, a, b, c, d, e, f):
     # y = ax^5 + bx^4 + cx^3 + dx^2 + ex + f
     return (a * (x ** 5)) + (b * (x ** 4)) + (c * (x ** 3)) + (d * x * x) + (e * x) + f
 
 
-def read_dataset(path):
-    with open(path) as f:
+def read_dataset(location):
+    with open(location) as f:
         lines = f.read().splitlines()
 
     del lines[0]
     name = lines[0]
     del lines[0]
     lines = [int(i) for i in lines]  # list[str] => list[int]
-    x_values = lines[0:32]
-    y_values = lines[32:64]
-    return name, x_values, y_values
+    xvals = lines[0:32]
+    yvals = lines[32:64]
+    return name, xvals, yvals
 
 
-def read_model(path):
-    with open(path) as f:
+def read_model(location):
+    with open(location) as f:
         lines = f.read().splitlines()
 
     return lines[1], lines[2], lines[3], lines[4], lines[5], lines[6], lines[7]
@@ -57,23 +57,19 @@ def main():
 
     datasetname, x, y = read_dataset(datasetloc)
     modelname, a, b, c, d, e, f = read_model(modelloc)
-
     plot.xlabel("x ekseni")
     plot.ylabel("y ekseni")
     plot.title(modelname)
-
     popt, _ = curve_fit(polyfunc, x, y)
     a, b, c, d, e, f = popt
-
     plot.scatter(x, y)
     x_line = arange(min(x), max(x), 1)
-    y_line = polynomial_function(x_line, a, b, c, d, e, f)
+    y_line = polyfunc(x_line, a, b, c, d, e, f)
     save_model(modelloc, modelname, a, b, c, d, e, f)
     plot.plot(x_line, y_line, '--', color='red')
-
-    image_location = modelname + " on " + datasetname + ".png"
-    plot.savefig(image_location)
-    print("mltool (pyscripts): [BİLGİ] model eğitildi. grafik '%s' konumuna kaydedildi" % image_location)
+    figloc = modelname + " on " + datasetname + ".png"
+    plot.savefig(figloc)
+    print("mltool (pyscripts): [BİLGİ] model eğitildi. grafik '%s' konumuna kaydedildi" % figloc)
 
 
 main()
