@@ -53,12 +53,12 @@ public partial class MainForm : Form
         string cli = $"{run}mltoolcli.exe";
         if (Directory.Exists(pyt) is false)
         {
-            MessageBox.Show("mltoolgui couldn't locate folder 'pyscripts' in base directory.\nPlease use script 'build_gui.bat' to build mltoolgui.", "Fatal Error!");
+            Message.Show("mltoolgui couldn't locate folder 'pyscripts' in base directory.\nPlease use script 'build_gui.bat' to build mltoolgui.", "Fatal Error!");
             Close();
         }
         if (File.Exists(cli) is false)
         {
-            MessageBox.Show("mltoolgui couldn't locate 'mltoolcli.exe' in base directory.\nPlease use script 'build_gui.bat' to build mltoolgui.", "Fatal Error!");
+            Message.Show("mltoolgui couldn't locate 'mltoolcli.exe' in base directory.\nPlease use script 'build_gui.bat' to build mltoolgui.", "Fatal Error!");
             Close();
         }
     }
@@ -73,13 +73,13 @@ public partial class MainForm : Form
         Process prc = Process.Start(info);
         prc.WaitForExit();
         if (prc.ExitCode is not 0 or -1000)
-            MessageBox.Show($"An error has occured.\n mltoolcli.exe returned status code: {prc.ExitCode}.", "Important Warning!");
+            Message.Show($"An error has occured.\n mltoolcli.exe returned status code: {prc.ExitCode}.", "Important Warning!");
     }
 
     private void Train()
     {
         if (string.IsNullOrEmpty(pathModelFile) || string.IsNullOrEmpty(pathDatasetFile))
-            MessageBox.Show("Add a data set and a model file to start", "Warning!");
+            Message.Show("Add a data set and a model file to start", "Warning!");
         else
             RunMltoolcli("train", $"{pathDatasetFile} {pathModelFile}");
     }
@@ -87,10 +87,10 @@ public partial class MainForm : Form
     private void Evaluate()
     {
         if (string.IsNullOrEmpty(pathModelFile))
-            MessageBox.Show("Add a model file to start", "Warning!");
+            Message.Show("Add a model file to start", "Warning!");
         else
         {
-            MessageBox.Show("Use the text box below to crunch numbers. Enter 'exit' to exit evaluation shell.", "Information");
+            Message.Show("Use the text box below to crunch numbers. Enter 'exit' to exit evaluation shell.", "Information");
             Lock(false);
         }
     }
@@ -137,12 +137,12 @@ public partial class MainForm : Form
                         ValidateFile(ofd.FileName.Replace(".dataset", ".model"));
                     }
                     else
-                        MessageBox.Show("Bundled files must exist under same folder!", "Warning!");
+                        Message.Show("Bundled files must exist under same folder!", "Warning!");
                 }
                 break;
 
             default:
-                MessageBox.Show($"MainForm.Load(): value of argument {nameof(what)} must be 'model' or 'dataset'");
+                Message.Show($"MainForm.Load(): value of argument {nameof(what)} must be 'model' or 'dataset'", "Warning!");
                 break;
         }
     }
@@ -150,7 +150,7 @@ public partial class MainForm : Form
     private double Calculate(double number)
     {
         if (string.IsNullOrEmpty(pathModelFile))
-            MessageBox.Show("Add a model file to start", "Warning!");
+            Message.Show("Add a model file to start", "Warning!");
         else
         {
             double result = 0;
@@ -189,7 +189,7 @@ public partial class MainForm : Form
                 return true;
 
             default:
-                MessageBox.Show($"File {path} is not recognized. Model or data set file must be selected!", "Warning!");
+                Message.Show($"File {path} is not recognized. Model or data set file must be selected!", "Warning!");
                 return false;
         }
     }
