@@ -250,7 +250,7 @@ namespace mltoolcli {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to new datase [name]    İsmi [name] olarak verilen model dosyası ve veri seti dosyasını yaratır. Dosyalar program klasöründe oluşturulur.
+        ///   Looks up a localized string similar to   new bundle [name]    İsmi [name] olarak verilen model dosyası ve veri seti dosyasını yaratır. Dosyalar program klasöründe oluşturulur.
         /// </summary>
         internal static string Syntax_New3 {
             get {

@@ -190,6 +190,6 @@
     <value>mltool: [HATA] bundle yaratılırken bir veya birden fazla hata meydana geldi.</value>
   </data>
   <data name="Syntax_New3" xml:space="preserve">
-    <value>new datase [name]    İsmi [name] olarak verilen model dosyası ve veri seti dosyasını yaratır. Dosyalar program klasöründe oluşturulur</value>
+    <value>  new bundle [name]    İsmi [name] olarak verilen model dosyası ve veri seti dosyasını yaratır. Dosyalar program klasöründe oluşturulur</value>
   </data>
 </root>
