@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Resources;
 using System.Runtime.InteropServices;
 using System.Threading;
 // ReSharper disable HeapView.ObjectAllocation.Evident
@@ -89,20 +87,24 @@ namespace mltoolcli
         /// <exception cref="FileNotFoundException">May throw this exception if script file is not found</exception>
         private static void CallScript(string scriptName, string additionalArgs)
         {
-            if (!File.Exists($"{AppContext.BaseDirectory}pyscripts/{scriptName}.py") && !File.Exists($"{AppContext.BaseDirectory}pyscripts\\{scriptName}.py"))
-                throw new FileNotFoundException(TurkishStrings.ExcpMsg_ScriptNotFound, $"{AppContext.BaseDirectory}{scriptName}");
+            string path = Path.Combine(AppContext.BaseDirectory, "pyscripts", $"{scriptName}.py");
+            string arguments = $"{path} {additionalArgs}";
+            
+            if (File.Exists(path) is false)
+                ErrorMessage(TurkishStrings.ExcpMsg_ScriptNotFound, path);
+
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                Process.Start(new ProcessStartInfo { FileName = "python", Arguments = $"{AppContext.BaseDirectory}pyscripts\\{scriptName}.py {additionalArgs}" });
+                Process.Start(new ProcessStartInfo { FileName = "python", Arguments = arguments });
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-                Process.Start(new ProcessStartInfo { FileName = "python3", Arguments = $"{AppContext.BaseDirectory}pyscripts/{scriptName}.py {additionalArgs}" });
+                Process.Start(new ProcessStartInfo { FileName = "python3", Arguments = arguments });
             else
-                Console.WriteLine("Ewww");
+                ErrorMessage("ErrMsg_UnsupportedPlatform");
 
             Thread.Sleep(1000);
         }
 
-        private static int ErrorMessage(string errorName, string additionalMessage)
+        private static int ErrorMessage(string errorName, string additionalMessage = "")
         {
             // ReSharper disable once LocalizableElement
             Console.WriteLine("{0}\n{1}", TurkishStrings.ResourceManager.GetString(errorName), additionalMessage);
@@ -114,6 +116,7 @@ namespace mltoolcli
                 "ErrMsg_Train0" => -1004,
                 "ErrMsg_ValidateFile0" => -1005,
                 "ExcpMsg_ScriptNotFound" => -1006,
+                "ErrMsg_UnsupportedPlatform" => -1007,
                 _ => 0
             };
         }
