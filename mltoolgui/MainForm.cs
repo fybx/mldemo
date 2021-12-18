@@ -31,7 +31,7 @@ public partial class MainForm : Form
         else
         {
             MessageBox.Show("Use the text box below to crunch numbers. Enter 'exit' to exit evaluation shell.", "Information");
-            ChangeState(false);
+            Lock(false);
         }
     }
 
@@ -39,8 +39,7 @@ public partial class MainForm : Form
     {
         ProcessStartInfo info = new()
         {
-            FileName = "python",
-            WindowStyle = ProcessWindowStyle.Hidden,
+            FileName = "python3",
             Arguments = $"{AppContext.BaseDirectory}pyscripts\\{scriptName}.py {arguments}"
         };
         Process.Start(info);
@@ -101,24 +100,23 @@ public partial class MainForm : Form
         if (e.KeyCode is Keys.Enter)
         {
             if (textBox1.Text is "exit")
-                ChangeState(true);
+                Lock(true);
             else if (double.TryParse(textBox1.Text, out double number))
                 rtbEvaluate.AppendText($"{modelname}({number}) = {Calculate(number)}");
             else
                 rtbEvaluate.AppendText("Please enter a number :(");
-            textBox1.Clear();
             e.SuppressKeyPress = true;
             e.Handled = true;
         }
     }
 
-    private void ChangeState(bool state)
+    private void Lock(bool state)
     {
         btnTrain.Enabled = state;
         btnEvaluate.Enabled = state;
         menuStrip.Enabled = state;
-        rtbEvaluate.ReadOnly = !state;
-        textBox1.ReadOnly = !state;
+        rtbEvaluate.Enabled = !state;
+        textBox1.Enabled = !state;
 
         rtbEvaluate.Text = state ? "beep boop? beep boop." : "";
         textBox1.Text = state ? "beep boop?" : "";
