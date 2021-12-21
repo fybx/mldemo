@@ -68,10 +68,13 @@ def main():
     popt, _ = curve_fit(polynomial5th, x, y)
     a, b, c, d, e, f = popt
     
-    plot.scatter(x, y)
     x_line = arange(min(x), max(x), 1)
     y_line = polynomial5th(x_line, a, b, c, d, e, f)
     save_model(model_path, model_name, a, b, c, d, e, f)
+
+    plot.xlim(0, max(x))
+    plot.ylim(0, max(y))
+    plot.scatter(x, y)
     plot.plot(x_line, y_line, color='red')
     
     figure_path = model_name + " on " + dataset_name + ".png"
