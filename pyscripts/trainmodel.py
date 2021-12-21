@@ -72,11 +72,11 @@ def main():
     y_line = polynomial5th(x_line, a, b, c, d, e, f)
     save_model(model_path, model_name, a, b, c, d, e, f)
 
-    plot.xlim(0, max(x))
-    plot.ylim(0, max(y))
+    plot.xlim(-128, max(x) + 128)
+    plot.ylim(-128, max(y) + 128)
     plot.scatter(x, y)
-    plot.plot(x_line, y_line, color='red')
-    
+    plot.plot(x_line, y_line, color='red')  
+
     figure_path = model_name + " on " + dataset_name + ".png"
     plot.savefig(figure_path)
     print(f"mltool (pyscripts): [BİLGİ] model eğitildi. grafik '{figure_path}' konumuna kaydedildi")
